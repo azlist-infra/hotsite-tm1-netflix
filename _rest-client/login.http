@@ -1,0 +1,11 @@
+
+
+POST https://api-netflix-feito-aqui.onrender.com/auth/login
+Content-Type: application/json
+
+{
+    "email": "admin@netflixfeitoaqui.com.br",
+    "password": "azlist@24"
+}
+
+    

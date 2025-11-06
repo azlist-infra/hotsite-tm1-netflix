@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    // CONFIGURAÇÃO PARA PATH MAPPING
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/api/*": ["./src/api/*"],
+      //"@/hooks/*": ["./src/hooks/*"],
+      "@/layouts/*": ["./src/layouts/*"],
+
+      "@/app/*": ["./src/app/*"],
+      
+      "@/designsystem/*": ["./src/designsystem/*"],
+      "@/ui": ["./srccomponents/ui/index"],
+      "@/components/*": ["./src/components/*"],
+      "@/providers/*": ["./src/providers/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/types/*": ["./src/lib/types/*"],
+      "@/utils/*": ["./src/lib/utils/*"],
+      "@/services/*": ["./src/services/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
