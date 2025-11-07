@@ -1,7 +1,6 @@
 // Tipos para o módulo de Pax Netflix
 
 import type { 
-    ApiResponse,
     ActionResponse
 } from '@/app/api/_shared'
 
@@ -117,10 +116,9 @@ export interface PaxNetflix {
 
 /**
  * Dados do Pax retornados pela API
+ * (Alias para PaxNetflix)
  */
-export interface PaxData extends PaxNetflix {
-    // Herda todos os campos de PaxNetflix
-}
+export type PaxData = PaxNetflix
 
 /**
  * Resposta completa do GET
