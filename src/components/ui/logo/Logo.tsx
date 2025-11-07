@@ -9,7 +9,7 @@ import NextLink from "next/link"
 import { Link } from "@chakra-ui/react"
 
 interface LogoProps {
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | number
   href?: string
   variant?: 'main' | 'icon'
   alt?: string
@@ -40,7 +40,7 @@ export function Logo({
   alt,
   priority = false,
 }: LogoProps) {
-  const dimension = SIZES[size]
+  const dimension = typeof size === 'number' ? size : SIZES[size]
   const src = LOGO_PATHS[variant]
   const logoAlt = alt || `AZ Staff ${variant === 'icon' ? 'Icon' : 'Logo'}`
 
