@@ -1,7 +1,7 @@
 'use client'
 
 import { LayoutHotsite } from '@/layouts/layout'
-import { Box, Container, Flex, Text, Link } from '@chakra-ui/react'
+import { Box, Flex, Text, Link } from '@chakra-ui/react'
 import React from 'react'
 import { Image } from '@/components/ui/image/Image'
 import { useForm } from 'react-hook-form'

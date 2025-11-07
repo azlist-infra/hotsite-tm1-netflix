@@ -1,6 +1,6 @@
 "use client"
 
-import { Logo } from "@/components/ui/logo/LogoOld"
+import { Logo } from "@/components/ui/logo/Logo"
 import { LogoSVG } from "@/assets/LogoSVG"
 import {
     Box,

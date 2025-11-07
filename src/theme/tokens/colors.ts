@@ -7,7 +7,7 @@ export const colorTokens = {
     brand: {
         main: { value: "#E50914" },
         hover: { value: "#C11119" },
-        active: { value: "E50914" },
+        active: { value: "#B20710" },
     },
     input: {
         text: { value: "#3A3A3A" },
