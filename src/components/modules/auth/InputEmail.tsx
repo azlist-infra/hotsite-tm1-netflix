@@ -5,19 +5,21 @@ import { Input } from '@chakra-ui/react'
 import { forwardRef, ComponentPropsWithoutRef } from 'react'
 
 interface InputEmailProps extends Omit<ComponentPropsWithoutRef<'input'>, 'type' | 'size'> {
+  label?: string
+  placeholder?: string
   error?: string
   isInvalid?: boolean
 }
 
 export const InputEmail = forwardRef<HTMLInputElement, InputEmailProps>(
-  ({ error, isInvalid, ...rest }, ref) => {
+  ({ error, isInvalid, label, placeholder, ...rest }, ref) => {
     return (
       <Field.Root invalid={isInvalid}>
-        <Field.Label>E-mail</Field.Label>
+        {label && <Field.Label>{label}</Field.Label>}
         <Input
           ref={ref}
           type="email"
-          placeholder="seu@email.com"
+          placeholder={placeholder}
           autoComplete="email"
           {...rest}
         />

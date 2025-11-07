@@ -1,17 +1,80 @@
 'use client'
 
-import { Box, Container, Flex, Text } from "@chakra-ui/react"
-import { Logo } from "@/components/ui"
+import { Box, Flex, Link } from "@chakra-ui/react"
+import { NetflixLogo } from "@/app/inscricao/components/NetflixLogo"
 
 export function FooterHotsite() {
   return (
-    <Box bg="black" color="white">
-      <Container maxW="6xl" py={8}>
-        <Flex direction="column" align="center" gap={4}>
-          <Logo.Main size="md" />
-          <Text>Contato: contato@netflixfeitoaqui.com.br</Text>
+    <Box 
+      bg="#222222" 
+      color="white"
+      h={{ base: '165px', md: '95px' }}
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
+      {/* Wrapper principal */}
+      <Flex
+        w={{ base: '90%', md: '1055px' }}
+        direction={{ base: 'column', md: 'row' }}
+        align={{ base: 'center', md: 'center' }}
+        justify={{ base: 'center', md: 'space-between' }}
+        gap={{ base: 4, md: 0 }}
+      >
+        {/* Logo Netflix - alinhado à esquerda no desktop */}
+        <Box>
+          <NetflixLogo 
+            width={132} 
+            height={35} 
+            fillColor="#FFFFFF" 
+          />
+        </Box>
+
+        {/* Wrapper secundário dos textos - 560px no desktop */}
+        <Flex
+          w={{ base: '100%', md: '560px' }}
+          direction={{ base: 'column', md: 'row' }}
+          justify="space-between"
+          align="center"
+          gap={{ base: 3, md: 0 }}
+          mt={{ base: 2, md: 0 }}
+        >
+          {/* Contato para suporte - alinhado à esquerda */}
+          <Link
+            href="#"
+            fontFamily="Roboto"
+            fontWeight={400}
+            fontSize="18px"
+            lineHeight="100%"
+            letterSpacing="0%"
+            textDecoration="underline"
+            textDecorationStyle="solid"
+            color="white"
+            _hover={{
+              opacity: 0.8
+            }}
+          >
+            Contato para suporte
+          </Link>
+
+          {/* Política de privacidade - alinhado à direita */}
+          <Link
+            href="#"
+            fontFamily="Roboto"
+            fontWeight={400}
+            fontSize="18px"
+            lineHeight="100%"
+            letterSpacing="0%"
+            color="white"
+            _hover={{
+              opacity: 0.8,
+              textDecoration: 'underline'
+            }}
+          >
+            Política de privacidade
+          </Link>
         </Flex>
-      </Container>
+      </Flex>
     </Box>
   )
 }

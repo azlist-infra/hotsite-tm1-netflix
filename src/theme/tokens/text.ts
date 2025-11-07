@@ -8,8 +8,7 @@ import fonts from '../fonts'
 const fontFamily = {
     primary: fonts.secondaryFont.style.fontFamily,
     secondary: fonts.secondaryFont.style.fontFamily,
-    custom: fonts.customFont.style.fontFamily,
-    custom2: fonts.customFont2.style.fontFamily,
+    custom: fonts.customFont.style.fontFamily
 }
 
 
@@ -34,76 +33,69 @@ export const fontFamilyTokens = {
 export const textStyles = defineTextStyles({
     brand: {
 
-        text: {
-
-
-            main: {
-                description: "Texto corporal padrão para parágrafos",
+        button: {
+            large: {
+                description: "Texto para botões",
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '400',
+                    fontSize: '24px',
+                    lineHeight: '24px',
+                    letterSpacing: '0px',
+                },
+            },
+            small: {
+                description: "Texto para botões",
                 value: {
                     fontFamily: fontFamily.primary,
                     fontWeight: '400',
                     fontSize: '16px',
-                    lineHeight: '24px',
+                    lineHeight: '16px',
                     letterSpacing: '0px',
-                    textDecoration: "None",
-                    textTransform: "None",
+                },
+            },
+        },
+
+        text: {
+
+            default: {
+                description: "Texto default",
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '400',
+                    fontSize: '22px',
+                    lineHeight: '130%',
+                    letterSpacing: '0%',
                 },
             },
 
             large: {
-                description: 'Texto corporal maior para destaque sutil',
+                description: "Texto large",
                 value: {
                     fontFamily: fontFamily.primary,
-                    fontWeight: '400',
-                    fontSize: '18px',
-                    lineHeight: '28px',
-                    letterSpacing: '0px',
-
+                    fontWeight: '700',
+                    fontSize: '22px',
+                    lineHeight: '130%',
+                    letterSpacing: '0%',
                 },
             },
 
             small: {
-                description: 'Texto corporal menor para informações secundárias',
+                description: "Texto small",
                 value: {
                     fontFamily: fontFamily.primary,
                     fontWeight: '400',
+                    fontStyle: 'normal',
                     fontSize: '14px',
-                    lineHeight: '20px',
-                    letterSpacing: '0px',
-
-                },
-            },
-
-        },
-
-        title: {
-            main: {
-                description: "Estilo de texto para títulos",
-                value: {
-                    fontFamily: fontFamily.primary,
-                    fontWeight: '600',
-                    fontSize: '24px',
-                    lineHeight: '32px',
-                    letterSpacing: '0px',
-                    textDecoration: "None",
-                    textTransform: "None",
-                },
-            },
-
-            subtitle: {
-                description: 'Subtítulo para complementar headings',
-                value: {
-                    fontFamily: fontFamily.primary,
-                    fontWeight: '500',
-                    fontSize: '18px',
-                    lineHeight: '26px',
-                    letterSpacing: '0px',
-
+                    lineHeight: '130%',
+                    letterSpacing: '0%',
                 },
             },
 
 
         },
+
+
 
         heading: {
             display: {
@@ -135,6 +127,19 @@ export const textStyles = defineTextStyles({
         },
 
         // ===== UI TEXTS =====
+        input: {
+            default: {
+                description: 'Texto para inputs',
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '400',
+                    fontSize: '18px',
+                    lineHeight: '100%',
+                    letterSpacing: '0%',
+                },
+            },
+        },
+
         form: {
             button: {
                 description: 'Texto para botões',

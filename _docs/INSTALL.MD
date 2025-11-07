@@ -1,5 +1,5 @@
 #update typescript befor change tokens
-npx @chakra-ui/cli typegen src/designsystem/theme/index.ts
+npx @chakra-ui/cli typegen src/theme/index.ts
 
 para não dar erro no CLI trocar a const font para uma default que está comentada, rodar cli e depois voltar para a que possui o google fonts. Tirar tudo de google fonts temporariamente
 src\designsystem\theme\fonts.ts

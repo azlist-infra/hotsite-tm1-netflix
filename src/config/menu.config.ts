@@ -2,9 +2,14 @@
  * 🧭 Configuração de Menus do Sistema
  * 
  * Define todos os itens de menu e suas permissões de acesso
+ * 
+ * NOTA: Hotsite público - sem autenticação
  */
 
-import type { User } from '@/app/api/auth/auth.types'
+// import type { User } from '@/app/api/auth/auth.types'
+
+// Tipo simplificado para hotsite sem auth
+type User = null
 
 // ========================================
 // TYPES

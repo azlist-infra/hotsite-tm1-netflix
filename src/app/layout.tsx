@@ -48,7 +48,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <body >
+      <body>
         <ChakraProviderApp>
           <ReactQueryProvider>
             {children}

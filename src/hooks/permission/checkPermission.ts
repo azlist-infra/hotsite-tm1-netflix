@@ -2,10 +2,15 @@
 
 // Sistema de verificação de permissões para Server Components
 // Uso: const { user } = await checkPermission({ requireAdmin: true })
+// 
+// NOTA: Hotsite público - sem autenticação
 
-import { redirect } from 'next/navigation'
-import { getCurrentUser } from '@/app/api/auth'
-import type { User } from '@/app/api/auth/auth.types'
+// import { redirect } from 'next/navigation'
+// import { getCurrentUser } from '@/app/api/auth'
+// import type { User } from '@/app/api/auth/auth.types'
+
+// Tipo simplificado para hotsite sem auth
+type User = null
 
 type UserRole = 'admin' | 'operador' | 'gestor' | 'assistente'
 
@@ -52,39 +57,8 @@ export async function checkPermission(
     config?: PermissionConfig,
     params?: Record<string, string>
 ): Promise<CheckPermissionResult> {
-    // 1. Verifica autenticação
-    const user = await getCurrentUser()
-    
-    if (!user) {
-        redirect('/auth/login')
-    }
-    
-    // 2. Sem config = todos autenticados podem acessar
-    if (!config) {
-        return { user, hasPermission: true }
-    }
-    
-    // 3. Verifica se é admin (se requerido)
-    if (config.requireAdmin && !user.isAdmin) {
-        redirect('/app')
-    }
-    
-    // 4. Verifica roles
-    if (config.roles && config.roles.length > 0) {
-        if (!config.roles.includes(user.role)) {
-            redirect('/app')
-        }
-    }
-    
-    // 5. Custom check
-    if (config.customCheck) {
-        const hasPermission = await config.customCheck(user, params)
-        if (!hasPermission) {
-            redirect('/app')
-        }
-    }
-    
-    // Se passou por todas as verificações, tem permissão
-    return { user, hasPermission: true }
+    // Hotsite público - sem autenticação
+    // Não deve ser usado em hotsite público
+    throw new Error('checkPermission não deve ser usado em hotsite público sem autenticação')
 }
 

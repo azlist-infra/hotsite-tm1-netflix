@@ -5,7 +5,7 @@ type CenterProps = FlexProps & {
     children: React.ReactNode
 }
 
-export function Center({ children, justify = "center", direction = "column", ...props }: CenterProps) {
+export function Center({ children, justify = "center", direction = "row", ...props }: CenterProps) {
 
     return (
         <ChakraCenter>
@@ -19,6 +19,7 @@ export function Center({ children, justify = "center", direction = "column", ...
             minW={props.minW || "breakpoint-sm"}
             w={props.w || "50%"}
             maxW={props.maxW || "100%"}
+            flex='1'
             {...props}
         >
             {children}

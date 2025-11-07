@@ -2,11 +2,16 @@
 
 // Hook de verificação de permissões para Client Components
 // Uso: const { user, loading } = usePermission({ requireAdmin: true })
+// 
+// NOTA: Hotsite público - sem autenticação
 
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { getCurrentUser } from '@/app/api/auth'
-import type { User } from '@/app/api/auth/auth.types'
+// import { useEffect, useState } from 'react'
+// import { useRouter } from 'next/navigation'
+// import { getCurrentUser } from '@/app/api/auth'
+// import type { User } from '@/app/api/auth/auth.types'
+
+// Tipo simplificado para hotsite sem auth
+type User = null
 
 type UserRole = 'admin' | 'operador' | 'gestor' | 'assistente'
 
@@ -55,70 +60,19 @@ export function usePermission(
     config?: PermissionConfig,
     params?: Record<string, string>
 ): UsePermissionResult {
-    const router = useRouter()
-    const [state, setState] = useState<UsePermissionResult>({
+    // Hotsite público - sem autenticação
+    // const router = useRouter()
+    // const [state, setState] = useState<UsePermissionResult>({
+    //     user: null,
+    //     loading: true,
+    //     hasPermission: false,
+    // })
+
+    // Hotsite público - retorna sem permissão
+    return {
         user: null,
-        loading: true,
-        hasPermission: false,
-    })
-
-    // Extrai valores primitivos para dependências do useEffect
-    const requireAdmin = config?.requireAdmin
-    const rolesKey = config?.roles?.join(',') || ''
-    const customCheckKey = config?.customCheck?.toString() || ''
-    const paramsKey = JSON.stringify(params || {})
-
-    useEffect(() => {
-        async function check() {
-            try {
-                // 1. Verifica autenticação
-                const user = await getCurrentUser()
-
-                if (!user) {
-                    router.push('/auth/login')
-                    return
-                }
-
-                // 2. Sem config = todos autenticados podem acessar
-                if (!config) {
-                    setState({ user, loading: false, hasPermission: true })
-                    return
-                }
-
-                // 3. Verifica se é admin (se requerido)
-                if (config.requireAdmin && !user.isAdmin) {
-                    router.push('/app')
-                    return
-                }
-
-                // 4. Verifica roles
-                if (config.roles && config.roles.length > 0) {
-                    if (!config.roles.includes(user.role)) {
-                        router.push('/app')
-                        return
-                    }
-                }
-
-                // 5. Custom check
-                if (config.customCheck) {
-                    const hasPermission = config.customCheck(user, params)
-                    if (!hasPermission) {
-                        router.push('/app')
-                        return
-                    }
-                }
-
-                // Se passou por todas as verificações, tem permissão
-                setState({ user, loading: false, hasPermission: true })
-            } catch (error) {
-                console.error('Error checking permission:', error)
-                router.push('/app')
-            }
-        }
-
-        check()
-    }, [requireAdmin, rolesKey, customCheckKey, paramsKey, router, config, params])
-
-    return state
+        loading: false,
+        hasPermission: false
+    }
 }
 

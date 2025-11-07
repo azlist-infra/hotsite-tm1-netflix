@@ -1,25 +1,14 @@
 
 
-import { Inter, Dancing_Script, Hanalei_Fill } from "next/font/google";
+import { Roboto } from "next/font/google";
 //import { Barriecito} from "next/font/google";
 
 
 
-const inter = Inter({
-    variable: "--font-inter",
+const roboto = Roboto({
+    variable: "--font-roboto",
     subsets: ["latin"],
-    weight: "600",
-});
-
-const dancingScript = Dancing_Script({
-    variable: "--font-dancing-script",
-    subsets: ["latin"],
-});
-
-const hanaleiFill = Hanalei_Fill({
-    variable: "--font-hanalei-fill",
-    subsets: ["latin"],
-    weight: "400",
+    weight: ["100", "300", "400", "500", "700", "900"],
 });
 
 /*
@@ -31,22 +20,18 @@ const barriecito = Barriecito({
 */
 
 
-const primaryFont = inter
-const secondaryFont = inter
-const customFont = hanaleiFill
-const customFont2 = dancingScript
-
-
-
+const primaryFont = roboto
+const secondaryFont = roboto
+const customFont = roboto
 
 
 const fonts = {
     primaryFont,
     secondaryFont,
     customFont,
-    customFont2,
 }
 
+export default fonts
 
 
 
@@ -59,8 +44,10 @@ const fonts = {
 const fonts = {
     primaryFont: { style: { fontFamily: "'Dancing Script', cursive" } },
     secondaryFont: { style: { fontFamily: "'Inter', sans-serif" } },
+    customFont: { style: { fontFamily: "'Inter', sans-serif" } },
 }
+
+export default fonts
 */
 
 
-export default fonts

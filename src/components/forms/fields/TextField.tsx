@@ -113,6 +113,7 @@ export const TextField = forwardRef(<T extends FieldValues>(
         disabled = false,
         flex,
         autoComplete,
+        ...rest
     } = props
 
     // ✅ Modo React Hook Form
@@ -138,6 +139,7 @@ export const TextField = forwardRef(<T extends FieldValues>(
                             size={size}
                             disabled={disabled}
                             autoComplete={autoComplete}
+                            {...rest}
                         />
                         {error && (
                             <Field.ErrorText>{error.message}</Field.ErrorText>

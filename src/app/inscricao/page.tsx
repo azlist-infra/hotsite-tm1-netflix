@@ -12,6 +12,7 @@ import { TitleBase } from './components/TitleBase'
 import { CustomSubmitButton } from './components/CustomSubmitButton'
 import { LocationSection } from './components/LocationSection'
 import { FAQAccordion } from './components/FAQAccordion'
+import { Wrapper } from '@/layouts/wrapper'
 
 const inscriptionSchema = z.object({
   nome: z.string().min(1, 'Nome completo é obrigatório').min(3, 'Nome deve ter no mínimo 3 caracteres'),
@@ -87,8 +88,8 @@ export default function InscricaoPage() {
 
   return (
     <>
-      <LayoutHotsite>
-        <Container maxW="100vw" py={10} minH="100vh" bgColor="black">
+      <LayoutHotsite fullWidth>
+      <Wrapper.Center >
           <Flex
             gap={8}
             align="center"
@@ -96,14 +97,15 @@ export default function InscricaoPage() {
             bgColor="black"
             flexDirection="column"
             py={30}
+            w={{base: "100%", md: "800px"}}
           >
             {/* Header com Imagem */}
-            <Box w="100%" maxW="1200px">
+            <Box w="800" maxW="1200px">
               <Image
                 src="/img/netflix/inscricao_imagem_01.png"
                 alt="Netflix Feito Aqui - Header"
-                width={1200}
-                height={400}
+                width={1056}
+                height={276}
               />
             </Box>
 
@@ -143,6 +145,7 @@ export default function InscricaoPage() {
                         placeholder="Digite seu nome completo"
                         required
                         disabled={isLoading}
+                        variant="default"
                       />
 
                       <TextField
@@ -152,6 +155,7 @@ export default function InscricaoPage() {
                         placeholder="Digite o nome da sua empresa"
                         required
                         disabled={isLoading}
+                        variant="default"
                       />
 
                       <TextField
@@ -162,6 +166,7 @@ export default function InscricaoPage() {
                         type="tel"
                         required
                         disabled={isLoading}
+                        variant="default"
                       />
 
                       <Box>
@@ -206,7 +211,7 @@ export default function InscricaoPage() {
               </Flex>
             </Box>
           </Flex>
-        </Container>
+        </Wrapper.Center>
       </LayoutHotsite>
     </>
   )

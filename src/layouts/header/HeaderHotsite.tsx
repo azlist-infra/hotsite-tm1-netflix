@@ -15,9 +15,6 @@ export function HeaderHotsite() {
           <Box flex="1">
             <MenuHotsite />
           </Box>
-          <Box>
-            <Box as="span">Auth</Box>
-          </Box>
         </Flex>
       </Container>
     </Box>

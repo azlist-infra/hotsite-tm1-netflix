@@ -1,8 +1,8 @@
 'use client'
 
-import { Box, Container, Flex, Text } from "@chakra-ui/react"
+import { Box, Container, Flex } from "@chakra-ui/react"
 import { ReactNode } from "react"
-import { debug } from "../debug"
+import { FooterHotsite } from "../footer/FooterHotsite"
 
 type LayoutHotsitetProps = {
   children: ReactNode
@@ -11,44 +11,21 @@ type LayoutHotsitetProps = {
   fullWidth?: boolean
 }
 
-export function LayoutHotsite({ children, header, footer, fullWidth }: LayoutHotsitetProps) {
+export function LayoutHotsite({ children, footer, fullWidth }: LayoutHotsitetProps) {
   return (
-    <Flex direction="column" minH="100vh">
-      <Text>Hotsite</Text>
-      <Box
-        as="header"
-        position="sticky"
-        top={0}
-        zIndex={10}
-        bg={debug.header}
-        borderBottom="1px solid"
-        borderColor="gray.200"
-      >
+    <Flex direction="column" minH="100vh" bgColor="transparent">
+      
+      <Flex as="main" flex="1" align="stretch" justify="center">
         {fullWidth ? (
-          <Box py={3}>{header ?? <Box>Navbar</Box>}</Box>
+          <>{children}</>
         ) : (
-          <Container maxW="6xl" py={3}>
-            {header ?? <Box>Navbar</Box>}
-          </Container>
+          <Container maxW="6xl" bgColor="green">{children}</Container>
         )}
-      </Box>
+      </Flex>
 
-      <Box as="main" flex="1" bg={debug.content} py={6}>
-        {fullWidth ? (
-          <Box>{children}</Box>
-        ) : (
-          <Container maxW="6xl">{children}</Container>
-        )}
-      </Box>
 
-      <Box as="footer" bg={debug.footer} borderTop="1px solid" borderColor="gray.200">
-        {fullWidth ? (
-          <Box py={3}>{footer ?? <Box>Footer</Box>}</Box>
-        ) : (
-          <Container maxW="6xl" py={3}>
-            {footer ?? <Box>Footer</Box>}
-          </Container>
-        )}
+      <Box as="footer">
+        {footer ?? <FooterHotsite />}
       </Box>
     </Flex>
   )

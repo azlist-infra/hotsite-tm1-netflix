@@ -7,10 +7,11 @@
 import { Box, HStack, Link, Text } from "@chakra-ui/react"
 import { getVisibleMenuItems, type MenuItem as MenuItemType } from "@/config/menu.config"
 import { MenuItemDropdown } from "./MenuItemDropdown"
-import type { User } from "@/app/api/auth/auth.types"
+// import type { User } from "@/app/api/auth/auth.types"
 
+// Hotsite público - sem autenticação
 interface MenuAppProps {
-    user: User | null
+    user: null
 }
 
 interface MenuItemProps {
