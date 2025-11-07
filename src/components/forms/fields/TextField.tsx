@@ -2,6 +2,7 @@
 
 import { forwardRef } from 'react'
 import { Input, Field } from '@chakra-ui/react'
+import type { InputProps } from '@chakra-ui/react'
 import { Controller } from 'react-hook-form'
 import type { Control, FieldValues, Path } from 'react-hook-form'
 
@@ -29,6 +30,8 @@ interface RHFTextFieldProps<T extends FieldValues> {
     flex?: number | string
     /** Autocomplete */
     autoComplete?: string
+    /** Variante do input */
+    variant?: InputProps['variant']
 }
 
 // Props quando usado SEM React Hook Form
@@ -61,6 +64,8 @@ interface StandardTextFieldProps {
     autoComplete?: string
     /** Callback Enter */
     onEnter?: () => void
+    /** Variante do input */
+    variant?: InputProps['variant']
 }
 
 type TextFieldProps<T extends FieldValues> = 
@@ -111,9 +116,9 @@ export const TextField = forwardRef(<T extends FieldValues>(
         type = 'text',
         size = 'md',
         disabled = false,
+        variant = 'outline',
         flex,
         autoComplete,
-        ...rest
     } = props
 
     // ✅ Modo React Hook Form
@@ -139,7 +144,7 @@ export const TextField = forwardRef(<T extends FieldValues>(
                             size={size}
                             disabled={disabled}
                             autoComplete={autoComplete}
-                            {...rest}
+                            variant={variant}
                         />
                         {error && (
                             <Field.ErrorText>{error.message}</Field.ErrorText>
