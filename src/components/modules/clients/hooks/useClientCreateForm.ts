@@ -31,9 +31,9 @@ export function useClientCreateForm() {
             try {
                 // Transforma dados do formulário em DTO da API
                 const clientData: CreateClientDto = {
-                    name: data.name,
-                    email: data.email,
-                    phone: data.phone || undefined,
+                    name: data.name as string,
+                    email: data.email as string,
+                    phone: (data.phone || undefined) as string | undefined,
                 }
 
                 const result = await createClientAction(clientData)

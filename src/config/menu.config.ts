@@ -83,22 +83,9 @@ export const menuItems: MenuItem[] = [
 /**
  * Verifica se o usuário tem permissão para ver um item do menu
  */
-export function canViewMenuItem(item: MenuItem, user: User | null): boolean {
-    // Se não está logado, não pode ver nenhum menu
-    if (!user) return false
-
-    // Se requer admin, verifica se é admin
-    if (item.requireAdmin) {
-        return user.isAdmin
-    }
-
-    // Se tem roles específicas, verifica se o usuário tem uma delas
-    if (item.roles && item.roles.length > 0) {
-        return item.roles.includes(user.role as UserRole)
-    }
-
-    // Se não tem restrição, todos autenticados podem ver
-    return true
+export function canViewMenuItem(_item: MenuItem, _user: User | null): boolean {
+    // Hotsite público - sem autenticação, nenhum menu protegido é exibido
+    return false
 }
 
 /**

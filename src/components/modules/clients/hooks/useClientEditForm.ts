@@ -32,10 +32,10 @@ export function useClientEditForm(client: Client) {
             try {
                 // Transforma dados do formulário em DTO da API
                 const updateData: UpdateClientDto = {
-                    name: data.name,
-                    email: data.email,
-                    phone: data.phone || undefined,
-                    isActive: data.isActive,
+                    name: data.name as string | undefined,
+                    email: data.email as string | undefined,
+                    phone: (data.phone || undefined) as string | undefined,
+                    isActive: data.isActive as boolean | undefined,
                 }
 
                 const result = await updateClientAction(client._id, updateData)
