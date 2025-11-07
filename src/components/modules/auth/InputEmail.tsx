@@ -1,30 +1,32 @@
 'use client'
 
-import { Field, InputProps } from '@chakra-ui/react'
+import { Field } from '@chakra-ui/react'
 import { Input } from '@chakra-ui/react'
-import { forwardRef, ComponentPropsWithoutRef } from 'react'
+import type { InputProps } from '@chakra-ui/react'
+import { forwardRef } from 'react'
 
-interface InputEmailProps extends Omit<ComponentPropsWithoutRef<'input'>, 'type' | 'size'> {
+// Type helper para aceitar variantes customizadas
+type InputPropsWithCustomVariant = Omit<InputProps, 'type' | 'variant'> & {
+  variant?: InputProps['variant'] | 'default' | (string & Record<never, never>)
+}
+
+interface InputEmailProps extends InputPropsWithCustomVariant {
   label?: string
-  placeholder?: string
   error?: string
   isInvalid?: boolean
-  variant?: InputProps['variant']
 }
 
 export const InputEmail = forwardRef<HTMLInputElement, InputEmailProps>(
-  ({ error, isInvalid, label, placeholder, variant, ...rest }, ref) => {
+  ({ error, isInvalid, label, variant, ...inputProps }, ref) => {
     return (
       <Field.Root invalid={isInvalid}>
         {label && <Field.Label>{label}</Field.Label>}
         <Input
           ref={ref}
           type="email"
-          placeholder={placeholder}
-          variant={variant}
           autoComplete="email"
-          size="md"
-          {...rest}
+          variant={variant as InputProps['variant']}
+          {...inputProps}
         />
         {error && <Field.ErrorText>{error}</Field.ErrorText>}
       </Field.Root>

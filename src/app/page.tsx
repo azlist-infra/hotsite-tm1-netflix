@@ -68,7 +68,7 @@ export default function Home() {
             {/* Formulário com input de e-mail e botão de submit */}
             <Box width="510px">
               <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                <VStack gap={4} width="100%">
+                <VStack gap={4} width="100%" bgColor="green">
                   <InputEmail
                     variant="default"
                     placeholder="E-mail"

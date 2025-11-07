@@ -6,66 +6,41 @@ import type { InputProps } from '@chakra-ui/react'
 import { Controller } from 'react-hook-form'
 import type { Control, FieldValues, Path } from 'react-hook-form'
 
+// Props base do componente (customizações específicas)
+interface BaseTextFieldProps {
+    /** Label do campo */
+    label?: string
+    /** Helper text */
+    helperText?: string
+    /** Se o campo é obrigatório */
+    required?: boolean
+}
+
+// Type helper para aceitar variantes customizadas + props do Chakra
+type InputPropsWithCustomVariant = Omit<InputProps, 'variant'> & {
+    variant?: InputProps['variant'] | 'default' | (string & Record<never, never>)
+}
+
 // Props quando usado COM React Hook Form
-interface RHFTextFieldProps<T extends FieldValues> {
+interface RHFTextFieldProps<T extends FieldValues> extends Omit<InputPropsWithCustomVariant, 'value' | 'onChange' | 'defaultValue'>, BaseTextFieldProps {
     /** Nome do campo (RHF) */
     name: Path<T>
     /** Control do RHF */
     control: Control<T>
-    /** Label do campo */
-    label?: string
-    /** Placeholder */
-    placeholder?: string
-    /** Helper text */
-    helperText?: string
-    /** Se o campo é obrigatório */
-    required?: boolean
-    /** Type do input */
-    type?: 'text' | 'email' | 'tel' | 'url' | 'password' | 'number'
-    /** Tamanho */
-    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-    /** Se está desabilitado */
-    disabled?: boolean
-    /** Flex para layout */
-    flex?: number | string
-    /** Autocomplete */
-    autoComplete?: string
-    /** Variante do input */
-    variant?: InputProps['variant']
 }
 
 // Props quando usado SEM React Hook Form
-interface StandardTextFieldProps {
+interface StandardTextFieldProps extends Omit<InputPropsWithCustomVariant, 'onChange'>, BaseTextFieldProps {
     /** Valor controlado */
     value: string
     /** Callback de mudança */
     onChange: (value: string) => void
-    /** Label do campo */
-    label?: string
-    /** Placeholder */
-    placeholder?: string
-    /** Helper text */
-    helperText?: string
-    /** Se o campo é obrigatório */
-    required?: boolean
-    /** Type do input */
-    type?: 'text' | 'email' | 'tel' | 'url' | 'password' | 'number'
-    /** Tamanho */
-    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-    /** Se está desabilitado */
-    disabled?: boolean
     /** Se é inválido */
     invalid?: boolean
     /** Mensagem de erro */
     errorMessage?: string
-    /** Flex para layout */
-    flex?: number | string
-    /** Autocomplete */
-    autoComplete?: string
     /** Callback Enter */
     onEnter?: () => void
-    /** Variante do input */
-    variant?: InputProps['variant']
 }
 
 type TextFieldProps<T extends FieldValues> = 
@@ -83,6 +58,7 @@ function isRHFMode<T extends FieldValues>(
  * Campo de texto genérico
  * 
  * Funciona COM ou SEM React Hook Form
+ * Aceita todas as props do Input do Chakra UI
  * 
  * @example
  * // Com RHF
@@ -92,6 +68,7 @@ function isRHFMode<T extends FieldValues>(
  *   label="Email"
  *   type="email"
  *   required
+ *   variant="default"
  * />
  * 
  * @example
@@ -108,22 +85,9 @@ export const TextField = forwardRef(<T extends FieldValues>(
     props: TextFieldProps<T>,
     ref: React.Ref<HTMLInputElement>
 ) => {
-    const {
-        label,
-        placeholder,
-        helperText,
-        required = false,
-        type = 'text',
-        size = 'md',
-        disabled = false,
-        variant = 'outline',
-        flex,
-        autoComplete,
-    } = props
-
     // ✅ Modo React Hook Form
     if (isRHFMode(props)) {
-        const { name, control } = props
+        const { name, control, label, helperText, required = false, variant, ...inputProps } = props
 
         return (
             <Controller
@@ -133,18 +97,13 @@ export const TextField = forwardRef(<T extends FieldValues>(
                     <Field.Root 
                         invalid={!!error} 
                         required={required}
-                        flex={flex}
                     >
                         {label && <Field.Label>{label}</Field.Label>}
                         <Input
                             {...field}
+                            {...inputProps}
+                            variant={variant as InputProps['variant']}
                             ref={ref}
-                            type={type}
-                            placeholder={placeholder}
-                            size={size}
-                            disabled={disabled}
-                            autoComplete={autoComplete}
-                            variant={variant}
                         />
                         {error && (
                             <Field.ErrorText>{error.message}</Field.ErrorText>
@@ -159,16 +118,17 @@ export const TextField = forwardRef(<T extends FieldValues>(
     }
 
     // ✅ Modo Standard (sem RHF)
-    const { value, onChange, invalid, errorMessage, onEnter } = props
+    const { value, onChange, invalid, errorMessage, onEnter, label, helperText, required = false, variant, ...inputProps } = props
 
     return (
         <Field.Root 
             invalid={invalid} 
             required={required}
-            flex={flex}
         >
             {label && <Field.Label>{label}</Field.Label>}
             <Input
+                {...inputProps}
+                variant={variant as InputProps['variant']}
                 ref={ref}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
@@ -178,11 +138,6 @@ export const TextField = forwardRef(<T extends FieldValues>(
                         onEnter()
                     }
                 }}
-                type={type}
-                placeholder={placeholder}
-                size={size}
-                disabled={disabled}
-                autoComplete={autoComplete}
             />
             {invalid && errorMessage && (
                 <Field.ErrorText>{errorMessage}</Field.ErrorText>
