@@ -36,7 +36,7 @@ export default function Home() {
 
   const onSubmit = async (data: EmailFormData) => {
     console.log('Email:', data.email)
-    // Aqui você pode adicionar a lógica de submit
+    alert('Email enviado com sucesso')
   }
 
   return (
@@ -68,7 +68,7 @@ export default function Home() {
             {/* Formulário com input de e-mail e botão de submit */}
             <Box width="510px">
               <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                <VStack gap={4} width="100%" bgColor="green">
+                <VStack gap={4} width="100%">
                   <InputEmail
                     variant="default"
                     placeholder="E-mail"

@@ -38,8 +38,11 @@ export default fonts
 // Fontes do sistema para evitar conflitos com o CLI do Chakra
 // Usar este bloco abaixo para rodar CLI do Chakra
 // 1. comentar o bloco de fontes padrão + const de cada fontes e imports (ou seja, tudo acima e descomentar o bloco de fontes temporárias abaixo
-// 2. rodar o comando cli
+// 2. rodar o comando cli "npx @chakra-ui/cli typegen src/theme/index.ts"
 // 3. retornar o bloco de fontes padrão e comentar o bloco de fontes
+
+// npx @chakra-ui/cli typegen src/theme/index.ts
+
 /*
 const fonts = {
     primaryFont: { style: { fontFamily: "'Dancing Script', cursive" } },
