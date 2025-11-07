@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "prebuild": "pnpm gen:types",
+    "prebuild": "npm run gen:types",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "gen:types": "npx @chakra-ui/cli typegen src/theme/index.ts"
+    "gen:types": "npx @chakra-ui/cli typegen src/theme/index.typegen.ts"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.24.2",
