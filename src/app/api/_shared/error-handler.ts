@@ -1,6 +1,5 @@
-'use server'
-
 // Utilitários para tratamento de erros consistente
+// Estas são funções helper, não Server Actions
 
 import { ServerApiError } from '@/lib/api/server-api'
 import type { ActionResponse, ApiErrorData } from './types'

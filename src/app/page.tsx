@@ -4,7 +4,7 @@
 
 import { LayoutHotsite } from '@/layouts/layout'
 import { Box, Flex, Text, Button, VStack } from '@chakra-ui/react'
-import React, { JSX } from 'react'
+import React, { JSX, useState } from 'react'
 import { Image } from '@/components/ui/image/Image'
 import { InputEmail } from '@/components/modules/auth/InputEmail'
 import { useForm } from 'react-hook-form'
@@ -13,6 +13,8 @@ import { z } from 'zod'
 import { CardOutline } from '@/layouts/box/CardOutline'
 import { Wrapper } from '@/layouts/wrapper'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { getPaxByEmailAction } from '@/app/api/pax-netflix'
 
 const emailSchema = z.object({
   email: z
@@ -24,6 +26,9 @@ const emailSchema = z.object({
 type EmailFormData = z.infer<typeof emailSchema>
 
 export default function Home() {
+  const router = useRouter()
+  const [error, setError] = useState<string>('')
+
   const {
     register,
     handleSubmit,
@@ -35,8 +40,25 @@ export default function Home() {
   const isLoading = isSubmitting
 
   const onSubmit = async (data: EmailFormData) => {
-    console.log('Email:', data.email)
-    alert('Email enviado com sucesso')
+    try {
+      setError('')
+      
+      // Busca participante pela API
+      const result = await getPaxByEmailAction(data.email)
+
+      if (result.success && result.data) {
+        // Salva dados do participante no sessionStorage
+        sessionStorage.setItem('paxData', JSON.stringify(result.data))
+        
+        // Redireciona para página de inscrição
+        router.push('/inscricao')
+      } else {
+        setError(result.error || 'Erro ao buscar participante')
+      }
+    } catch (err) {
+      console.error('Erro:', err)
+      setError('Erro ao processar solicitação. Tente novamente.')
+    }
   }
 
   return (
@@ -73,8 +95,8 @@ export default function Home() {
                     variant="default"
                     placeholder="E-mail"
                     {...register('email')}
-                    error={errors.email?.message}
-                    isInvalid={!!errors.email}
+                    error={errors.email?.message || error}
+                    isInvalid={!!errors.email || !!error}
                     disabled={isLoading}
                     width={{base: "80%", md: "100%"}}
                   />
@@ -87,8 +109,14 @@ export default function Home() {
                     disabled={isLoading}
                     size="md"
                   >
-                    {isLoading ? 'Entrar...' : 'Entrar'}
+                    {isLoading ? 'Buscando...' : 'Entrar'}
                   </Button>
+
+                  {error && (
+                    <Text textStyle="brand.text.default" color="red.400" textAlign="center">
+                      {error}
+                    </Text>
+                  )}
 
                 </VStack>
               </form>

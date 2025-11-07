@@ -2,7 +2,7 @@
 
 import { LayoutHotsite } from '@/layouts/layout'
 import { Box, Flex, Text, Link } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image } from '@/components/ui/image/Image'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -13,11 +13,13 @@ import { CustomSubmitButton } from './components/CustomSubmitButton'
 import { LocationSection } from './components/LocationSection'
 import { FAQAccordion } from './components/FAQAccordion'
 import { Wrapper } from '@/layouts/wrapper'
+import { useRouter } from 'next/navigation'
+import { createPaxNetflixAction, type GetPaxNetflixResponse } from '@/app/api/pax-netflix'
 
 const inscriptionSchema = z.object({
   nome: z.string().min(1, 'Nome completo é obrigatório').min(3, 'Nome deve ter no mínimo 3 caracteres'),
   empresa: z.string().min(1, 'Empresa é obrigatória'),
-  telefone: z.string().min(1, 'Telefone é obrigatório'),
+  telefone: z.string().min(1, 'Telefone é obrigatório').min(8, 'Telefone deve ter no mínimo 8 dígitos'),
   privacidade: z.boolean().refine((val) => val === true, {
     message: 'Você deve aceitar a política de privacidade'
   })
@@ -69,6 +71,11 @@ const faqData = [
 ]
 
 export default function InscricaoPage() {
+  const router = useRouter()
+  const [paxData, setPaxData] = useState<GetPaxNetflixResponse | null>(null)
+  const [error, setError] = useState<string>('')
+  const [successMessage, setSuccessMessage] = useState<string>('')
+
   const {
     control,
     handleSubmit,
@@ -81,10 +88,86 @@ export default function InscricaoPage() {
 
   const isLoading = isSubmitting
 
+  // Carrega dados do participante do sessionStorage
+  useEffect(() => {
+    const storedData = sessionStorage.getItem('paxData')
+    
+    if (!storedData) {
+      // Se não há dados, redireciona para home
+      router.push('/')
+      return
+    }
+
+    try {
+      const parsed = JSON.parse(storedData) as GetPaxNetflixResponse
+      console.log('📦 Dados carregados do sessionStorage:', parsed)
+      console.log('📧 Email encontrado em:', {
+        'paxData.Email': parsed.Email,
+        'paxData.paxData?.Email': parsed.paxData?.Email
+      })
+      setPaxData(parsed)
+    } catch (err) {
+      console.error('Erro ao carregar dados:', err)
+      router.push('/')
+    }
+  }, [router])
+
   const onSubmit = async (data: InscriptionFormData) => {
-    console.log('Dados do formulário:', data)
-    // Aqui você pode adicionar a lógica de submit
+    // Busca o email em múltiplos lugares possíveis da resposta
+    const email = paxData?.Email || paxData?.paxData?.Email
+    
+    if (!email) {
+      setError('Email não encontrado. Por favor, volte e tente novamente.')
+      console.error('Dados disponíveis:', paxData)
+      return
+    }
+
+    try {
+      setError('')
+      setSuccessMessage('')
+
+      const result = await createPaxNetflixAction({
+        Name: data.nome,
+        Email: email,
+        Phone: data.telefone,
+        CompanyName: data.empresa,
+        SearchKey: email,
+      })
+
+      if (result.success) {
+        setSuccessMessage('Inscrição realizada com sucesso! Você receberá um e-mail de confirmação.')
+        
+        // Atualiza os dados no sessionStorage
+        const updatedPaxData = { ...paxData, event: 'confirmed' as const }
+        sessionStorage.setItem('paxData', JSON.stringify(updatedPaxData))
+        setPaxData(updatedPaxData)
+        
+        // Scroll para o topo
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        setError(result.error || 'Erro ao realizar inscrição')
+      }
+    } catch (err) {
+      console.error('Erro:', err)
+      setError('Erro ao processar inscrição. Tente novamente.')
+    }
   }
+
+  // Loading enquanto carrega dados
+  if (!paxData) {
+    return (
+      <LayoutHotsite fullWidth>
+        <Wrapper.Center>
+          <Flex minH="100vh" align="center" justify="center">
+            <Text color="white" fontSize="18px">Carregando...</Text>
+          </Flex>
+        </Wrapper.Center>
+      </LayoutHotsite>
+    )
+  }
+
+  // Verifica se já está confirmado
+  const isAlreadyConfirmed = paxData.event === 'confirmed'
 
   return (
     <>
@@ -127,7 +210,7 @@ export default function InscricaoPage() {
             {/* Seção de Inscrição */}
             <Box maxW="800px" w="100%" px={4}>
               <Flex direction="column" gap={4} mb={8}>
-                <TitleBase title="Confirme sua presença" />
+                <TitleBase title={isAlreadyConfirmed ? "Inscrição Confirmada" : "Confirme sua presença"} />
                 
                 <Box
                   bg="gray.900"
@@ -136,61 +219,156 @@ export default function InscricaoPage() {
                   border="1px solid"
                   borderColor="gray.700"
                 >
-                  <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                  {/* Mostra Email */}
+                  <Box mb={4} p={4} bg="gray.800" borderRadius="8px">
+                    <Text fontSize="14px" color="gray.400" mb={1}>
+                      E-mail do convite:
+                    </Text>
+                    <Text fontSize="16px" color="white" fontWeight="bold">
+                      {paxData.Email || paxData.paxData?.Email || 'Email não disponível'}
+                    </Text>
+                  </Box>
+
+                  {/* Mensagens de Sucesso/Erro */}
+                  {successMessage && (
+                    <Box mb={4} p={4} bg="green.900" borderRadius="8px" border="1px solid" borderColor="green.600">
+                      <Text color="green.200" fontSize="16px">
+                        ✓ {successMessage}
+                      </Text>
+                    </Box>
+                  )}
+
+                  {error && (
+                    <Box mb={4} p={4} bg="red.900" borderRadius="8px" border="1px solid" borderColor="red.600">
+                      <Text color="red.200" fontSize="16px">
+                        ✕ {error}
+                      </Text>
+                    </Box>
+                  )}
+
+                  {/* Cenário 1: Já está inscrito (event === "confirmed") */}
+                  {isAlreadyConfirmed ? (
                     <Flex direction="column" gap={4}>
-                      <TextField
-                        name="nome"
-                        control={control}
-                        label="Nome completo"
-                        placeholder="Digite seu nome completo"
-                        required
-                        disabled={isLoading}
-                        variant="default"
-                      />
-
-                      <TextField
-                        name="empresa"
-                        control={control}
-                        label="Empresa"
-                        placeholder="Digite o nome da sua empresa"
-                        required
-                        disabled={isLoading}
-                        variant="default"
-                      />
-
-                      <TextField
-                        name="telefone"
-                        control={control}
-                        label="Telefone"
-                        placeholder="(11) 99999-9999"
-                        type="tel"
-                        required
-                        disabled={isLoading}
-                        variant="default"
-                      />
-
-                      <Box>
-                        <CheckboxField
-                          name="privacidade"
-                          control={control}
-                          label="Autorizo o tratamento dos meus dados pessoais conforme a Política de Privacidade."
-                          disabled={isLoading}
-                          colorPalette="red"
-                        />
-                        <Text fontSize="12px" color="gray.400" mt={1}>
-                          Ao marcar esta opção, você concorda com nossa{' '}
-                          <Link color="#E50914" textDecoration="underline" href="#">
-                            Política de Privacidade
-                          </Link>
-                          .
+                      <Box p={4} bg="green.900" borderRadius="8px" border="1px solid" borderColor="green.600">
+                        <Text fontSize="18px" color="green.200" fontWeight="bold" mb={3}>
+                          ✓ Sua presença já está confirmada!
+                        </Text>
+                        <Text fontSize="16px" color="white" mb={2}>
+                          Obrigado por confirmar sua participação no evento Netflix Feito Aqui.
+                        </Text>
+                        <Text fontSize="16px" color="gray.300">
+                          Você receberá mais informações por e-mail nos próximos dias.
                         </Text>
                       </Box>
 
-                      <CustomSubmitButton isLoading={isLoading}>
-                        {isLoading ? 'Enviando...' : 'Enviar'}
-                      </CustomSubmitButton>
+                      {/* Dados Cadastrais */}
+                      <Box>
+                        <Text fontSize="16px" color="white" fontWeight="bold" mb={3}>
+                          Seus dados cadastrais:
+                        </Text>
+                        <Flex direction="column" gap={3}>
+                          <Box>
+                            <Text fontSize="14px" color="gray.400">Nome:</Text>
+                            <Text fontSize="16px" color="white">
+                              {paxData.Name || paxData.paxData?.Name || '-'}
+                            </Text>
+                          </Box>
+                          
+                          <Box>
+                            <Text fontSize="14px" color="gray.400">E-mail:</Text>
+                            <Text fontSize="16px" color="white">
+                              {paxData.Email || paxData.paxData?.Email || '-'}
+                            </Text>
+                          </Box>
+                          
+                          <Box>
+                            <Text fontSize="14px" color="gray.400">Empresa:</Text>
+                            <Text fontSize="16px" color="white">
+                              {paxData.CompanyName || paxData.paxData?.CompanyName || '-'}
+                            </Text>
+                          </Box>
+                          
+                          <Box>
+                            <Text fontSize="14px" color="gray.400">Telefone:</Text>
+                            <Text fontSize="16px" color="white">
+                              {paxData.Phone || paxData.paxData?.Phone || '-'}
+                            </Text>
+                          </Box>
+                          
+                          <Box>
+                            <Text fontSize="14px" color="gray.400">SearchKey:</Text>
+                            <Text fontSize="16px" color="white">
+                              {paxData.SearchKey || paxData.paxData?.SearchKey || '-'}
+                            </Text>
+                          </Box>
+                          
+                          <Box>
+                            <Text fontSize="14px" color="gray.400">Tipo de ingresso:</Text>
+                            <Text fontSize="16px" color="white">
+                              {paxData.eventTicket?.ticket?.Name || paxData.paxData?.eventTicket?.ticket?.Name || '-'}
+                            </Text>
+                          </Box>
+                        </Flex>
+                      </Box>
                     </Flex>
-                  </form>
+                  ) : (
+                    /* Cenário 2: Não está inscrito (event === "base") - Mostra formulário */
+                    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                      <Flex direction="column" gap={4}>
+                        <TextField
+                          name="nome"
+                          control={control}
+                          label="Nome completo"
+                          placeholder="Digite seu nome completo"
+                          required
+                          disabled={isLoading}
+                          variant="default"
+                        />
+
+                        <TextField
+                          name="empresa"
+                          control={control}
+                          label="Empresa"
+                          placeholder="Digite o nome da sua empresa"
+                          required
+                          disabled={isLoading}
+                          variant="default"
+                        />
+
+                        <TextField
+                          name="telefone"
+                          control={control}
+                          label="Telefone"
+                          placeholder="(11) 99999-9999"
+                          type="tel"
+                          required
+                          disabled={isLoading}
+                          variant="default"
+                        />
+
+                        <Box>
+                          <CheckboxField
+                            name="privacidade"
+                            control={control}
+                            label="Autorizo o tratamento dos meus dados pessoais conforme a Política de Privacidade."
+                            disabled={isLoading}
+                            colorPalette="red"
+                          />
+                          <Text fontSize="12px" color="gray.400" mt={1}>
+                            Ao marcar esta opção, você concorda com nossa{' '}
+                            <Link color="#E50914" textDecoration="underline" href="#">
+                              Política de Privacidade
+                            </Link>
+                            .
+                          </Text>
+                        </Box>
+
+                        <CustomSubmitButton isLoading={isLoading}>
+                          {isLoading ? 'Enviando...' : 'Confirmar Presença'}
+                        </CustomSubmitButton>
+                      </Flex>
+                    </form>
+                  )}
                 </Box>
               </Flex>
             </Box>

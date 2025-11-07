@@ -10,6 +10,12 @@ export const API_CONFIG = {
         'Accept': 'application/json',
     },
 
+    // Netflix API - configuração especial
+    NETFLIX: {
+        BASE_URL: 'https://api-rds-aztools.onrender.com',
+        TOKEN: 'YmxzLmZlbGlwZWRhczpkaXdlZndoaXVkamlvYXNkam5lYm5lbw==',
+    },
+
     // Endpoints
     ENDPOINTS: {
         AUTH: {
@@ -26,6 +32,10 @@ export const API_CONFIG = {
         CLIENTS: {
             BASE: '/clients',
             BY_ID: (id: string) => `/clients/${id}`,
+        },
+        PAX_NETFLIX: {
+            BASE: '/api/pax/netflix',
+            BY_EMAIL: (email: string) => `/api/pax/netflix/${email}`,
         },
     },
 } as const;
