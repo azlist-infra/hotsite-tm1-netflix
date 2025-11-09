@@ -28,7 +28,7 @@ export const InputEmail = forwardRef<HTMLInputElement, InputEmailProps>(
           variant={variant as InputProps['variant']}
           {...inputProps}
         />
-        {error && <Field.ErrorText>{error}</Field.ErrorText>}
+        {error && <Field.ErrorText textStyle="brand.text.small">{error}</Field.ErrorText>}
       </Field.Root>
     )
   }

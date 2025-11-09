@@ -5,6 +5,7 @@ import "./globals.css";
 
 import { ChakraProviderApp, ReactQueryProvider } from "@/providers";
 import { Toaster } from "@/components/ui/toast";
+import { ModalProvider } from "@/contexts/ModalContext";
 import type { Metadata, Viewport } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -51,7 +52,9 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       <body>
         <ChakraProviderApp>
           <ReactQueryProvider>
-            {children}
+            <ModalProvider>
+              {children}
+            </ModalProvider>
           </ReactQueryProvider>
           <Toaster />
         </ChakraProviderApp>

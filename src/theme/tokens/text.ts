@@ -33,6 +33,29 @@ export const fontFamilyTokens = {
 export const textStyles = defineTextStyles({
     brand: {
 
+        modal: {
+            title: {
+                description: "Título do modal",
+                value: {
+                    fontFamily: fontFamily.secondary,
+                    fontWeight: '700',
+                    fontSize: { base: '24px', md: '36px' },
+                    lineHeight: '100%',
+                    letterSpacing: '0%',
+                },
+            },
+            text: {
+                description: "Texto do modal",
+                value: {
+                    fontFamily: fontFamily.secondary,
+                    fontWeight: '400',
+                    fontSize: { base: '18px', md: '26.67px' },
+                    lineHeight: '100%',
+                    letterSpacing: '0%',
+                },
+            },
+        },
+
         button: {
             large: {
                 description: "Texto para botões",
@@ -42,6 +65,7 @@ export const textStyles = defineTextStyles({
                     fontSize: '24px',
                     lineHeight: '24px',
                     letterSpacing: '0px',
+                    
                 },
             },
             small: {
@@ -63,7 +87,7 @@ export const textStyles = defineTextStyles({
                 value: {
                     fontFamily: fontFamily.primary,
                     fontWeight: '400',
-                    fontSize: '22px',
+                    fontSize: { base: '18px', md: '22px' },
                     lineHeight: '130%',
                     letterSpacing: '0%',
                 },
@@ -74,7 +98,7 @@ export const textStyles = defineTextStyles({
                 value: {
                     fontFamily: fontFamily.primary,
                     fontWeight: '700',
-                    fontSize: '22px',
+                    fontSize: { base: '18px', md: '22px' },
                     lineHeight: '130%',
                     letterSpacing: '0%',
                 },

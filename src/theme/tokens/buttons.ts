@@ -12,8 +12,8 @@ export const buttonRecipe = defineRecipe({
                 borderWidth: "0",
                 borderRadius: "4px",
                 height: "56px",
-                py: "12px",
-                px: "24px",
+                py: "6",
+                px: "16",
                 textStyle: "brand.button.large",
                 _hover: {
                     bg: "{colors.brand.hover}",

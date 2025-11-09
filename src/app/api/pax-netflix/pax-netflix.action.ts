@@ -103,7 +103,7 @@ export async function getPaxByEmailAction(
             if (errorMessage.includes('pax_not_found')) {
                 return {
                     success: false,
-                    error: 'E-mail não encontrado. Verifique se você digitou corretamente o e-mail do convite.',
+                    error: 'Caso não consiga acessar, verifique se o e-mail está correto ou entre em contato conosco.',
                 }
             }
             

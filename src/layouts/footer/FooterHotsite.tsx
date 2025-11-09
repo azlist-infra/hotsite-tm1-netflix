@@ -2,6 +2,7 @@
 
 import { Box, Flex, Link } from "@chakra-ui/react"
 import { NetflixLogo } from "@/app/inscricao/components/NetflixLogo"
+import { ContactLink } from "@/components/modules/netflix/ContactLink"
 
 export function FooterHotsite() {
   return (
@@ -40,22 +41,13 @@ export function FooterHotsite() {
           mt={{ base: 2, md: 0 }}
         >
           {/* Contato para suporte - alinhado à esquerda */}
-          <Link
-            href="#"
-            fontFamily="Roboto"
-            fontWeight={400}
+          <ContactLink 
             fontSize="18px"
-            lineHeight="100%"
-            letterSpacing="0%"
-            textDecoration="underline"
-            textDecorationStyle="solid"
             color="white"
-            _hover={{
-              opacity: 0.8
-            }}
+            textDecoration="underline"
           >
             Contato para suporte
-          </Link>
+          </ContactLink>
 
           {/* Política de privacidade - alinhado à direita */}
           <Link

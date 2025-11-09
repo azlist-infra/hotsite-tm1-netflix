@@ -10,20 +10,21 @@ export const CardOutline = ({ children, ...rest }: CardOutlineProps) => {
         <Flex
             flexDirection="column"
             align="center"
-            justify="center"
+            justify="flex-start"
 
-            border="2px solid white"
+            border="1px solid white"
             borderRadius={20}
 
-            w={{ base: '90%', md: '682px' }}
-            mx={{ base: 'auto', md: 'auto' }}
-            minH={{ base: "500px", md: "657px" }}
+            w={{ base: '85%', md: '682px' }}
+            mx="auto"
+            minH={{ base: "auto", md: "657px" }}
             {...rest}
         >
             <VStack
                 align="center"
-                gap={8}
-                p={0}
+                gap={{ base: 3, md: 4 }}
+                p={4}
+                w="100%"
             >
                 {children}
             </VStack>

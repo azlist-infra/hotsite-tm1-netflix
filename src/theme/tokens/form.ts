@@ -10,9 +10,11 @@ export const inputRecipe = defineRecipe({
                 bg: "white",
                 height: "51px",
                 borderRadius: "0px",
-
                 color: "{colors.input.text}",
                 textStyle: "brand.input.default",
+                _placeholder: {
+                    color: "#3A3A3A",
+                },
                 _focus: {
                     borderColor: "{colors.brand.main}",
                     boxShadow: "0 0 0 2px {colors.brand.main}",
