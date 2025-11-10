@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Box, Text, Button, VStack, Flex, AbsoluteCenter } from '@chakra-ui/react'
+import { Box, Text, Button, VStack } from '@chakra-ui/react'
 import Link from 'next/link'
 
 // Layouts

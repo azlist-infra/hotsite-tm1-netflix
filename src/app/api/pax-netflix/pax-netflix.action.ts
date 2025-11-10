@@ -22,7 +22,13 @@ class NetflixServerApiClient {
 
     constructor() {
         this.baseURL = API_CONFIG.NETFLIX.BASE_URL
-        this.token = API_CONFIG.NETFLIX.TOKEN
+        const token = API_CONFIG.NETFLIX.TOKEN
+        
+        if (!token) {
+            throw new Error('API_TOKEN não está configurado nas variáveis de ambiente')
+        }
+        
+        this.token = token
     }
 
     private async request<T>(

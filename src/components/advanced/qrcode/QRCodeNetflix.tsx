@@ -2,7 +2,6 @@
 
 import React, { useMemo } from 'react'
 import { QrCode, Button, Icon } from '@chakra-ui/react'
-import { LuDownload } from 'react-icons/lu'
 import { Icons } from '@/components/ui/icon'
 
 interface QRCodeNetflixProps {
