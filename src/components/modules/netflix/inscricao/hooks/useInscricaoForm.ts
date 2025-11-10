@@ -76,11 +76,7 @@ export function useInscricaoForm() {
 
     try {
       const parsed = JSON.parse(storedData) as GetPaxNetflixResponse
-      console.log('📦 Dados carregados do sessionStorage:', parsed)
-      console.log('📧 Email encontrado em:', {
-        'paxData.Email': parsed.Email,
-        'paxData.paxData?.Email': parsed.paxData?.Email
-      })
+      
       setPaxData(parsed)
     } catch (err) {
       console.error('Erro ao carregar dados:', err)
@@ -148,7 +144,7 @@ console.log('🔍 Resultado da inscrição:', result)
             SearchKey: email,
           }
         }
-        console.log('🔍 PAx Data atualizado:', updatedPaxData)
+        
         sessionStorage.setItem('paxData', JSON.stringify(updatedPaxData))
         setPaxData(updatedPaxData)
 
