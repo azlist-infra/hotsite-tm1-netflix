@@ -7,7 +7,7 @@ export const buttonRecipe = defineRecipe({
     variants: {
         variant: {
             custom: {
-                bg: "{colors.brand.main}",
+                bg: "{colors.primary}",
                 color: "white",
                 borderWidth: "0",
                 borderRadius: "4px",

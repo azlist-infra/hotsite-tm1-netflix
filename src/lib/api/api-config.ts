@@ -13,7 +13,8 @@ export const API_CONFIG = {
     // Netflix API - configuração especial
     NETFLIX: {
         BASE_URL: 'https://api-rds-aztools.onrender.com',
-        TOKEN: 'YmxzLmZlbGlwZWRhczpkaXdlZndoaXVkamlvYXNkam5lYm5lbw==',
+        //TOKEN: 'YmxzLmZlbGlwZWRhczpkaXdlZndoaXVkamlvYXNkam5lYm5lbw==',
+        TOKEN: process.env.API_TOKEN,
     },
 
     // Endpoints

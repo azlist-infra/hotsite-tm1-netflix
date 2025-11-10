@@ -84,6 +84,7 @@ export const NetflixModal = ({
                                     textAlign="center"
                                     color="white"
                                     maxW="90%"
+                                    mb={{ base: 4, md: 4 }}
                                 >
                                     {title}
                                 </Text>
@@ -102,9 +103,11 @@ export const NetflixModal = ({
  * Botão de fechar padrão Netflix
  */
 export const NetflixModalCloseButton = ({
-    onClose
+    onClose,
+    btnText = 'Fechar',
 }: {
     onClose: () => void
+    btnText?: string
 }) => {
     return (
         <Button
@@ -120,8 +123,9 @@ export const NetflixModalCloseButton = ({
             fontWeight="500"
             minW={{ base: '200px', md: '274px' }}
             h={{ base: '56px', md: '66px' }}
+            mt={8}
         >
-            Fechar
+            {btnText}
         </Button>
     )
 }

@@ -10,10 +10,12 @@ interface RHFCheckboxFieldProps<T extends FieldValues> {
     name: Path<T>
     /** Control do RHF */
     control: Control<T>
-    /** Label do checkbox */
-    label: string
+    /** Label do checkbox (string simples) */
+    label?: string
+    /** Children do checkbox (para HTML customizado) - priorizado sobre label */
+    children?: React.ReactNode
     /** Helper text */
-    helperText?: string
+    helperText?: string | React.ReactNode
     /** Tamanho */
     size?: 'xs' | 'sm' | 'md' | 'lg'
     /** Se está desabilitado */
@@ -30,10 +32,12 @@ interface StandardCheckboxFieldProps {
     checked: boolean
     /** Callback de mudança */
     onChange: (checked: boolean) => void
-    /** Label do checkbox */
-    label: string
+    /** Label do checkbox (string simples) */
+    label?: string
+    /** Children do checkbox (para HTML customizado) - priorizado sobre label */
+    children?: React.ReactNode
     /** Helper text */
-    helperText?: string
+    helperText?: string | React.ReactNode
     /** Tamanho */
     size?: 'xs' | 'sm' | 'md' | 'lg'
     /** Se está desabilitado */
@@ -83,24 +87,32 @@ export function CheckboxField<T extends FieldValues>(
 ) {
     const {
         label,
+        children,
         helperText,
         size = 'md',
         disabled = false,
         colorPalette = 'blue',
         variant = 'solid',
     } = props
+    
+    // Prioriza children sobre label
+    const displayLabel = children || label
 
     // ✅ Modo React Hook Form
     if (isRHFMode(props)) {
         const { name, control } = props
 
         return (
-            <Field.Root>
-                <Controller
-                    name={name}
-                    control={control}
-                    render={({ field }) => (
-                        <Checkbox.Root
+            <Controller
+                name={name}
+                control={control}
+                render={({ field, fieldState: { error } }) => (
+                    <Field.Root invalid={!!error}>
+                        <Checkbox.Root 
+                            //bg="green.600"
+                            alignItems="center"
+                            gap={4}
+                            
                             checked={field.value}
                             onCheckedChange={(e) => field.onChange(e.checked)}
                             size={size}
@@ -110,14 +122,19 @@ export function CheckboxField<T extends FieldValues>(
                         >
                             <Checkbox.HiddenInput />
                             <Checkbox.Control />
-                            <Checkbox.Label>{label}</Checkbox.Label>
+                            <Checkbox.Label textStyle="brand.text.small" color="white">{displayLabel}</Checkbox.Label>
                         </Checkbox.Root>
-                    )}
-                />
-                {helperText && (
-                    <Field.HelperText>{helperText}</Field.HelperText>
+                        {error && (
+                            <Field.ErrorText textStyle="brand.text.small" mt={2}>
+                                {error.message}
+                            </Field.ErrorText>
+                        )}
+                        {helperText && !error && (
+                            <Field.HelperText>{helperText}</Field.HelperText>
+                        )}
+                    </Field.Root>
                 )}
-            </Field.Root>
+            />
         )
     }
 
@@ -136,7 +153,7 @@ export function CheckboxField<T extends FieldValues>(
             >
                 <Checkbox.HiddenInput />
                 <Checkbox.Control />
-                <Checkbox.Label>{label}</Checkbox.Label>
+                <Checkbox.Label>{displayLabel}</Checkbox.Label>
             </Checkbox.Root>
             {helperText && (
                 <Field.HelperText>{helperText}</Field.HelperText>

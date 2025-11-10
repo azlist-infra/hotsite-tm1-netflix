@@ -1,8 +1,37 @@
 'use client'
 
 import { forwardRef } from 'react'
+import { Controller } from 'react-hook-form'
 import { TextField } from './TextField'
 import type { Control, FieldValues, Path } from 'react-hook-form'
+
+/**
+ * Formata string para o padrão de telefone brasileiro (NN) NNNNN-NNNN
+ */
+const formatPhoneNumber = (value: string): string => {
+    // Remove tudo que não é número
+    const numbers = value.replace(/\D/g, '')
+    
+    // Limita a 11 dígitos
+    const limited = numbers.slice(0, 11)
+    
+    // Aplica a máscara
+    if (limited.length <= 2) {
+        return limited
+    } else if (limited.length <= 7) {
+        return `(${limited.slice(0, 2)}) ${limited.slice(2)}`
+    } else {
+        return `(${limited.slice(0, 2)}) ${limited.slice(2, 7)}-${limited.slice(7)}`
+    }
+}
+
+/**
+ * Remove a formatação e retorna apenas números (limitado a 11 dígitos)
+ */
+const unformatPhoneNumber = (value: string): string => {
+    // Remove tudo que não é número e limita a 11 dígitos
+    return value.replace(/\D/g, '').slice(0, 11)
+}
 
 // Props quando usado COM React Hook Form
 interface RHFPhoneFieldProps<T extends FieldValues> {
@@ -15,6 +44,7 @@ interface RHFPhoneFieldProps<T extends FieldValues> {
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
     disabled?: boolean
     flex?: number | string
+    variant?: string
 }
 
 // Props quando usado SEM React Hook Form
@@ -31,6 +61,7 @@ interface StandardPhoneFieldProps {
     errorMessage?: string
     flex?: number | string
     onEnter?: () => void
+    variant?: string
 }
 
 type PhoneFieldProps<T extends FieldValues> = 
@@ -38,16 +69,17 @@ type PhoneFieldProps<T extends FieldValues> =
     | StandardPhoneFieldProps
 
 /**
- * Campo de Telefone
+ * Campo de Telefone com máscara (NN) NNNNN-NNNN
  * 
- * Wrapper de TextField com configurações específicas para telefone
- * Futuramente pode incluir máscara
+ * Usa TextField internamente com formatação automática para telefone brasileiro
  * 
  * @example
  * // Com RHF
  * <PhoneField
- *   name="phone"
+ *   name="telefone"
  *   control={control}
+ *   placeholder="Telefone"
+ *   helperText="Formato: (11) 99999-9999"
  * />
  * 
  * @example
@@ -62,40 +94,57 @@ export const PhoneField = forwardRef(<T extends FieldValues>(
     props: PhoneFieldProps<T>,
     ref: React.Ref<HTMLInputElement>
 ) => {
-    const defaultLabel = props.label ?? 'Telefone'
-    const defaultPlaceholder = props.placeholder ?? '+55 11 99999-9999'
+    const defaultPlaceholder = props.placeholder ?? 'Telefone'
 
     // Determina se está usando RHF ou modo padrão
     const hasControl = 'control' in props && props.control
     
     if (hasControl) {
-        // Modo RHF
+        // Modo RHF com Controller para aplicar máscara
         const rhfProps = props as RHFPhoneFieldProps<T>
+        
         return (
-            <TextField
+            <Controller
                 name={rhfProps.name}
                 control={rhfProps.control}
-                label={defaultLabel}
-                placeholder={defaultPlaceholder}
-                helperText={rhfProps.helperText}
-                required={rhfProps.required}
-                size={rhfProps.size}
-                disabled={rhfProps.disabled}
-                flex={rhfProps.flex}
-                type="tel"
-                autoComplete="tel"
-                ref={ref}
+                render={({ field, fieldState: { error } }) => (
+                    <TextField
+                        value={formatPhoneNumber(field.value || '')}
+                        onChange={(formatted) => {
+                            const unformatted = unformatPhoneNumber(formatted)
+                            field.onChange(unformatted)
+                        }}
+                        onBlur={field.onBlur}
+                        label={rhfProps.label}
+                        placeholder={defaultPlaceholder}
+                        helperText={rhfProps.helperText}
+                        required={rhfProps.required}
+                        size={rhfProps.size}
+                        disabled={rhfProps.disabled}
+                        flex={rhfProps.flex}
+                        variant={rhfProps.variant}
+                        type="tel"
+                        autoComplete="tel"
+                        invalid={!!error}
+                        errorMessage={error?.message}
+                        ref={ref}
+                    />
+                )}
             />
         )
     }
 
     // Modo padrão
     const standardProps = props as StandardPhoneFieldProps
+    
     return (
         <TextField
-            value={standardProps.value}
-            onChange={standardProps.onChange}
-            label={defaultLabel}
+            value={formatPhoneNumber(standardProps.value || '')}
+            onChange={(formatted) => {
+                const unformatted = unformatPhoneNumber(formatted)
+                standardProps.onChange(unformatted)
+            }}
+            label={standardProps.label}
             placeholder={defaultPlaceholder}
             helperText={standardProps.helperText}
             required={standardProps.required}
@@ -105,6 +154,7 @@ export const PhoneField = forwardRef(<T extends FieldValues>(
             errorMessage={standardProps.errorMessage}
             flex={standardProps.flex}
             onEnter={standardProps.onEnter}
+            variant={standardProps.variant}
             type="tel"
             autoComplete="tel"
             ref={ref}

@@ -1,17 +1,29 @@
 import { defineTextStyles } from "@chakra-ui/react"
 import fonts from '../fonts.typegen'
 
+// Define os nomes das fontes para utilização fácil nos tokens
+const fontFamily = {
+    primary: fonts.secondaryFont.style.fontFamily,
+    secondary: fonts.secondaryFont.style.fontFamily,
+    custom: fonts.customFont.style.fontFamily
+}
+
 // fontes utlizadas no projeto importadas no theme do chakra
 export const fontFamilyTokens = {
     // define a fonte padrão para os títulos do projeto
     heading: {
-        value: fonts.secondaryFont.style.fontFamily,
+        value: fontFamily.primary,
         description: 'Fonte para títulos - Roboto'
     },
     // define a fonte padrão para os textos do projeto
     body: {
-        value: fonts.secondaryFont.style.fontFamily,
-        description: 'Fonte para textos - Roboto'
+        value: fontFamily.secondary,
+        description: 'Fonte para textos corporais - Roboto'
+    },
+    // define a fonte customizada VCR OSD Mono
+    custom: {
+        value: fontFamily.custom,
+        description: 'Fonte customizada - VCR OSD Mono'
     },
 }
 
@@ -19,59 +31,144 @@ export const fontFamilyTokens = {
 // Define os estilos de texto customizados do projeto
 export const textStyles = defineTextStyles({
     brand: {
-        text: {
+        modal: {
             title: {
-                description: 'Texto para títulos',
+                description: "Título do modal",
                 value: {
+                    fontFamily: fontFamily.primary,
                     fontWeight: '700',
-                    fontSize: '20px',
-                    lineHeight: '140%',
+                    fontSize: { base: '24px', md: '36px' },
+                    lineHeight: '100%',
                     letterSpacing: '0%',
                 },
             },
-            large: {
-                description: 'Texto grande',
+            text: {
+                description: "Texto do modal",
                 value: {
-                    fontWeight: '700',
-                    fontSize: '20px',
-                    lineHeight: '140%',
-                    letterSpacing: '0%',
-                },
-            },
-            default: {
-                description: 'Texto padrão',
-                value: {
+                    fontFamily: fontFamily.primary,
                     fontWeight: '400',
-                    fontSize: '16px',
-                    lineHeight: '140%',
+                    fontSize: { base: '18px', md: '26.67px' },
+                    lineHeight: '100%',
                     letterSpacing: '0%',
+                },
+            },
+        },
+
+        button: {
+            large: {
+                description: "Texto para botões",
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '400',
+                    fontSize: '24px',
+                    lineHeight: '24px',
+                    letterSpacing: '0px',
                 },
             },
             small: {
-                description: 'Texto pequeno',
+                description: "Texto para botões",
                 value: {
+                    fontFamily: fontFamily.primary,
                     fontWeight: '400',
-                    fontSize: '14px',
-                    lineHeight: '140%',
-                    letterSpacing: '0%',
+                    fontSize: '16px',
+                    lineHeight: '16px',
+                    letterSpacing: '0px',
                 },
             },
         },
-        button: {
-            large: {
-                description: 'Botão grande',
+
+        text: {
+            default: {
+                description: "Texto default",
                 value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '400',
+                    fontSize: { base: '18px', md: '22px' },
+                    lineHeight: '130%',
+                    letterSpacing: '0%',
+                },
+            },
+            normal: {
+                description: "Texto default",
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '400',
+                    fontSize: { base: '14px', md: '18px' },
+                    lineHeight: '130%',
+                    letterSpacing: '0%',
+                },
+            },
+            large: {
+                description: "Texto large",
+                value: {
+                    fontFamily: fontFamily.primary,
                     fontWeight: '700',
-                    fontSize: '18px',
-                    lineHeight: '140%',
+                    fontSize: { base: '18px', md: '22px' },
+                    lineHeight: '130%',
+                    letterSpacing: '0%',
+                },
+            },
+            xlbold: {
+                description: "Texto Inscricao bold",
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '700',
+                    fontSize: { base: '18px', sm: '20px', md: '26px' },
+                    lineHeight: '130%',
+                    letterSpacing: '0.02em',
+                },
+            },
+            xl: {
+                description: "Texto Inscricao normal",
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '400',
+                    fontSize: { base: '18px', sm: '20px', md: '26px' },
+                    lineHeight: '130%',
+                    letterSpacing: '0.02em',
+                },
+            },
+            small: {
+                description: "Texto small",
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '400',
+                    fontStyle: 'normal',
+                    fontSize: '14px',
+                    lineHeight: '130%',
                     letterSpacing: '0%',
                 },
             },
         },
+
+        heading: {
+            display: {
+                description: 'Título principal para hero sections',
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '700',
+                    fontSize: { base: '32px', md: '40px', lg: '48px' },
+                    lineHeight: { base: '38px', md: '44px', lg: '52px' },
+                    letterSpacing: '-0.02em',
+                },
+            },
+            hero: {
+                description: 'Título hero responsivo',
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '700',
+                    fontSize: { base: '28px', md: '36px', lg: '44px' },
+                    lineHeight: { base: '32px', md: '40px', lg: '48px' },
+                    letterSpacing: '-0.01em',
+                },
+            },
+        },
+
         input: {
             default: {
                 description: 'Texto para inputs',
                 value: {
+                    fontFamily: fontFamily.primary,
                     fontWeight: '400',
                     fontSize: '18px',
                     lineHeight: '100%',
@@ -79,5 +176,139 @@ export const textStyles = defineTextStyles({
                 },
             },
         },
-    },
+
+        form: {
+            button: {
+                description: 'Texto para botões',
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '500',
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    letterSpacing: '0px',
+                },
+            },
+            label: {
+                description: 'Labels de formulários',
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '500',
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    letterSpacing: '0px',
+                },
+            },
+            helper: {
+                description: 'Texto de ajuda em formulários',
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '400',
+                    fontSize: '12px',
+                    lineHeight: '18px',
+                    letterSpacing: '0px',
+                },
+            },
+        },
+
+        card: {
+            title: {
+                description: 'Título de cartões',
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '600',
+                    fontSize: '16px',
+                    lineHeight: '22px',
+                    letterSpacing: '0px',
+                },
+            },
+            subtitle: {
+                description: 'Subtítulo de cartões',
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '400',
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    letterSpacing: '0px',
+                },
+            },
+            text: {
+                description: 'Descrição de cartões',
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '400',
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    letterSpacing: '0px',
+                },
+            },
+            subtext: {
+                description: 'Texto de cartões',
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '400',
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    letterSpacing: '0px',
+                },
+            },
+        },
+
+        special: {
+            link: {
+                description: "Estilo de texto para links",
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '400',
+                    fontSize: '16px',
+                    lineHeight: '24px',
+                    letterSpacing: '0px',
+                    textDecoration: "underline",
+                    textTransform: "uppercase",
+                },
+            },
+            accent: {
+                description: 'Texto com destaque colorido',
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '600',
+                    fontSize: '16px',
+                    lineHeight: '22px',
+                    letterSpacing: '0px',
+                },
+            },
+        },
+
+        location: {
+            title: {
+                description: 'Título da seção Local',
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '700',
+                    fontSize: { base: '18px', sm: '20px', md: '29px' },
+                    lineHeight: '100%',
+                    letterSpacing: '0%',
+                },
+            },
+            normal: {
+                description: 'Texto normal da seção Local',
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '400',
+                    fontSize: { base: '18px', sm: '20px', md: '26px' },
+                    lineHeight: '110%',
+                    letterSpacing: '0%',
+                },
+            },
+            bold: {
+                description: 'Texto bold da seção Local',
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '700',
+                    fontSize: { base: '18px', sm: '20px', md: '26px' },
+                    lineHeight: '110%',
+                    letterSpacing: '0%',
+                },
+            },
+        }
+    }
 })

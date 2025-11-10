@@ -13,7 +13,7 @@ type LayoutHotsitetProps = {
 
 export function LayoutHotsite({ children, footer, fullWidth }: LayoutHotsitetProps) {
   return (
-    <Flex direction="column" minH="100vh" bgColor="transparent">
+    <Flex direction="column" minH="100vh" >
       
       <Flex as="main" flex="1" align="stretch" justify="center">
         {fullWidth ? (

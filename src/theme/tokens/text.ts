@@ -17,12 +17,17 @@ export const fontFamilyTokens = {
     // define a fonte padrão para os títulos do projeto
     heading: {
         value: fontFamily.primary,
-        description: 'Fonte para títulos - Dancing Script'
+        description: 'Fonte para títulos - Roboto'
     },
     // define a fonte padrão para os textos do projeto
     body: {
         value: fontFamily.secondary,
-        description: 'Fonte para textos corporais - Inter'
+        description: 'Fonte para textos corporais - Roboto'
+    },
+    // define a fonte customizada VCR OSD Mono
+    custom: {
+        value: fontFamily.custom,
+        description: 'Fonte customizada - VCR OSD Mono'
     },
 }
 
@@ -37,7 +42,7 @@ export const textStyles = defineTextStyles({
             title: {
                 description: "Título do modal",
                 value: {
-                    fontFamily: fontFamily.secondary,
+                    fontFamily: fontFamily.primary,
                     fontWeight: '700',
                     fontSize: { base: '24px', md: '36px' },
                     lineHeight: '100%',
@@ -47,7 +52,7 @@ export const textStyles = defineTextStyles({
             text: {
                 description: "Texto do modal",
                 value: {
-                    fontFamily: fontFamily.secondary,
+                    fontFamily: fontFamily.primary,
                     fontWeight: '400',
                     fontSize: { base: '18px', md: '26.67px' },
                     lineHeight: '100%',
@@ -93,6 +98,17 @@ export const textStyles = defineTextStyles({
                 },
             },
 
+            normal: {
+                description: "Texto default",
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '400',
+                    fontSize: { base: '14px', md: '18px' },
+                    lineHeight: '130%',
+                    letterSpacing: '0%',
+                },
+            },
+
             large: {
                 description: "Texto large",
                 value: {
@@ -101,6 +117,30 @@ export const textStyles = defineTextStyles({
                     fontSize: { base: '18px', md: '22px' },
                     lineHeight: '130%',
                     letterSpacing: '0%',
+                },
+            },
+
+
+
+            xlbold: {
+                description: "Texto Inscricao bold",
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '700',
+                    fontSize: { base: '18px', sm: '20px', md: '26px' },
+                    lineHeight: '130%',
+                    letterSpacing: '0.02em',
+                },
+            },
+
+            xl: {
+                description: "Texto Inscricao normal",
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '400',
+                    fontSize: { base: '18px', sm: '20px', md: '26px' },
+                    lineHeight: '130%',
+                    letterSpacing: '0.02em',
                 },
             },
 
@@ -274,6 +314,39 @@ export const textStyles = defineTextStyles({
             },
 
 
+        },
+
+        location: {
+            title: {
+                description: 'Título da seção Local',
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '700',
+                    fontSize: { base: '18px', sm: '20px', md: '29px' },
+                    lineHeight: '100%',
+                    letterSpacing: '0%',
+                },
+            },
+            normal: {
+                description: 'Texto normal da seção Local',
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '400',
+                    fontSize: { base: '18px', sm: '20px', md: '26px' },
+                    lineHeight: '110%',
+                    letterSpacing: '0%',
+                },
+            },
+            bold: {
+                description: 'Texto bold da seção Local',
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '700',
+                    fontSize: { base: '18px', sm: '20px', md: '26px' },
+                    lineHeight: '110%',
+                    letterSpacing: '0%',
+                },
+            },
         }
     }
 })

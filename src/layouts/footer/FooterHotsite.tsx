@@ -1,10 +1,10 @@
 'use client'
 
 import { Box, Flex, Link } from "@chakra-ui/react"
-import { NetflixLogo } from "@/app/inscricao/components/NetflixLogo"
-import { ContactLink } from "@/components/modules/netflix/ContactLink"
+import { NetflixLogo, ContactLink } from "@/components/modules/netflix"
 
 export function FooterHotsite() {
+
   return (
     <Box 
       bg="#222222" 
@@ -24,11 +24,13 @@ export function FooterHotsite() {
       >
         {/* Logo Netflix - alinhado à esquerda no desktop */}
         <Box>
+          <Link href="/" target="_self">
           <NetflixLogo 
             width={132} 
             height={35} 
             fillColor="#FFFFFF" 
           />
+          </Link>
         </Box>
 
         {/* Wrapper secundário dos textos - 560px no desktop */}
@@ -51,7 +53,8 @@ export function FooterHotsite() {
 
           {/* Política de privacidade - alinhado à direita */}
           <Link
-            href="#"
+            href="https://help.netflix.com/legal/privacy"
+            target="_blank"
             fontFamily="Roboto"
             fontWeight={400}
             fontSize="18px"

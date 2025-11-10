@@ -114,11 +114,13 @@ export function useHomeForm() {
                 setError(errorMessage)
 
                 // Mostra modal de erro
+                /*
                 showModal({
                     title: 'E-mail não encontrado',
                     message: 'Não encontramos seu e-mail em nossa lista de convidados. Por favor, verifique se digitou corretamente ou entre em contato conosco.',
                     size: 'md'
                 })
+                */
 
                 // Anima o help-text em caso de erro
                 highlightHelpText()

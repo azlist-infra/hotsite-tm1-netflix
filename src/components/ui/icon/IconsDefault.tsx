@@ -1,6 +1,5 @@
 
 
-import { Icon } from "@chakra-ui/react"
 
 import {
     // Navegação & Interface
@@ -73,8 +72,6 @@ import {
     LuExternalLink,
     LuCopy,
 
-    // Telescópio
-    LuTelescope,
 } from "react-icons/lu";
 
 import { MdOutlineList } from "react-icons/md";

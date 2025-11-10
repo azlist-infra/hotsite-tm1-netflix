@@ -7,6 +7,7 @@ import { Text } from '@chakra-ui/react'
 interface ModalConfig {
   title?: string
   message: string | ReactNode
+  btnText?: string
   size?: 'sm' | 'md' | 'lg' | 'xl'
   showCloseButton?: boolean
   onClose?: () => void
@@ -53,14 +54,19 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
         showCloseButton={config.showCloseButton}
       >
         {typeof config.message === 'string' ? (
-          <Text textStyle="brand.modal.text" textAlign="center" color="white">
+          <Text 
+            textStyle="brand.modal.text" 
+            textAlign="center" 
+            color="white"
+            whiteSpace="pre-line"
+          >
             {config.message}
           </Text>
         ) : (
           config.message
         )}
         
-        <NetflixModalCloseButton onClose={closeModal} />
+        <NetflixModalCloseButton onClose={closeModal} btnText={config.btnText} />
       </NetflixModal>
     </ModalContext.Provider>
   )

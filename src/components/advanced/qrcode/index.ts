@@ -1,0 +1,2 @@
+export { QRCodeNetflix } from './QRCodeNetflix'
+

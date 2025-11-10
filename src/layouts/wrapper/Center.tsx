@@ -14,10 +14,12 @@ export function Center({ children, justify = "center", direction = "row", ...pro
             justify={justify}
             direction={direction}
             bg={props.bg || "transparent"}
-            p={4}
+            //bg='green.600'
+
+            p={props.padding || 4}
             minH={props.minH || "200px"}
-            minW={props.minW || "breakpoint-sm"}
-            w={props.w || "50%"}
+            minW={props.minW || "breakpoint-base"}
+            w={props.w || "100%"}
             maxW={props.maxW || "100%"}
             flex='1'
             {...props}

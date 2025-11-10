@@ -1,16 +1,15 @@
 // Tokens de cores do tema
 export const colorTokens = {
-    primary: { value: "#A020F0" },
-    secondary: { value: "#EE0F0F" },
-    background: { value: "{colors.gray.100}" },
-   
-    brand: {
-        main: { value: "#E50914" },
-        hover: { value: "#C11119" },
-        active: { value: "#B20710" },
-    },
+    primary: { value: "#E50914" },
+    secondary: { value: "{colors.yellow.500}" },
+    background: { value: "{colors.black}" },
+
     input: {
         text: { value: "#3A3A3A" },
+        placeholder: { value: "#3A3A3A" },
+        label: { value: "white" },
+        helperText: { value: "{colors.gray.300}" },
+        error: { value: "{colors.red.500}" },
     },
 }
 

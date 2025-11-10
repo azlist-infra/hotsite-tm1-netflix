@@ -43,8 +43,8 @@ interface StandardTextFieldProps extends Omit<InputPropsWithCustomVariant, 'onCh
     onEnter?: () => void
 }
 
-type TextFieldProps<T extends FieldValues> = 
-    | RHFTextFieldProps<T> 
+type TextFieldProps<T extends FieldValues> =
+    | RHFTextFieldProps<T>
     | StandardTextFieldProps
 
 // Type guard para verificar se é RHF
@@ -94,23 +94,25 @@ export const TextField = forwardRef(<T extends FieldValues>(
                 name={name}
                 control={control}
                 render={({ field, fieldState: { error } }) => (
-                    <Field.Root 
-                        invalid={!!error} 
+                    <Field.Root
+                        invalid={!!error}
                         required={required}
                     >
-                        {label && <Field.Label>{label}</Field.Label>}
+                        {label && <Field.Label textStyle="brand.text.small" color="input.label">{label}</Field.Label>}
                         <Input
                             {...field}
                             {...inputProps}
                             variant={variant as InputProps['variant']}
                             ref={ref}
                         />
+                        {helperText && (
+                            <Field.HelperText textStyle="brand.text.small" color="input.helperText">{helperText}</Field.HelperText>
+                        )}
                         {error && (
-                            <Field.ErrorText>{error.message}</Field.ErrorText>
+                            <Field.ErrorText textStyle="brand.text.small" color="input.error">{error.message}</Field.ErrorText>
                         )}
-                        {helperText && !error && (
-                            <Field.HelperText>{helperText}</Field.HelperText>
-                        )}
+
+
                     </Field.Root>
                 )}
             />
@@ -121,11 +123,11 @@ export const TextField = forwardRef(<T extends FieldValues>(
     const { value, onChange, invalid, errorMessage, onEnter, label, helperText, required = false, variant, ...inputProps } = props
 
     return (
-        <Field.Root 
-            invalid={invalid} 
+        <Field.Root
+            invalid={invalid}
             required={required}
         >
-            {label && <Field.Label>{label}</Field.Label>}
+            {label && <Field.Label textStyle="brand.text.small" color="input.label">{label}</Field.Label>}
             <Input
                 {...inputProps}
                 variant={variant as InputProps['variant']}
@@ -139,12 +141,13 @@ export const TextField = forwardRef(<T extends FieldValues>(
                     }
                 }}
             />
+            {helperText && (
+                <Field.HelperText textStyle="brand.text.small" color="input.helperText">{helperText}</Field.HelperText>
+            )}
             {invalid && errorMessage && (
-                <Field.ErrorText>{errorMessage}</Field.ErrorText>
+                <Field.ErrorText textStyle="brand.text.small" color="input.error">{errorMessage}</Field.ErrorText>
             )}
-            {helperText && !invalid && (
-                <Field.HelperText>{helperText}</Field.HelperText>
-            )}
+
         </Field.Root>
     )
 }) as <T extends FieldValues>(

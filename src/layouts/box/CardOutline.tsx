@@ -15,9 +15,10 @@ export const CardOutline = ({ children, ...rest }: CardOutlineProps) => {
             border="1px solid white"
             borderRadius={20}
 
-            w={{ base: '85%', md: '682px' }}
+            w={{ base: '80%', md: '682px' }}
             mx="auto"
-            minH={{ base: "auto", md: "657px" }}
+            minH={{ base: "auto", md: "auto" }}
+            
             {...rest}
         >
             <VStack

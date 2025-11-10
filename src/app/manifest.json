@@ -1,23 +1,24 @@
 {
-  "name": "Netflix Feito Aqui",
-  "short_name": "Netflix Feito Aqui",
-  "description": "Netflix Feito Aqui - Nasce no Brasil, viaja pelo mundo",
+  "name": "Feito Aqui",
+  "short_name": "Feito Aqui",
+  "description": "Feito Aqui - Nasce no Brasil, viaja pelo mundo",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
   "icons": [
     {
-      "src": "/favicon/favicon-192.png",
+      "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
     },
     {
-      "src": "/favicon/favicon-512.png",
+      "src": "/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
     }
+
   ]
 }
