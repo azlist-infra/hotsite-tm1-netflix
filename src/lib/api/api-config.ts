@@ -10,11 +10,10 @@ export const API_CONFIG = {
         'Accept': 'application/json',
     },
 
-    // Netflix API - configuração especial
+    // Netflix API - configuração especial - teste
     NETFLIX: {
         BASE_URL: 'https://api-rds-aztools.onrender.com',
-        //TOKEN: 'YmxzLmZlbGlwZWRhczpkaXdlZndoaXVkamlvYXNkam5lYm5lbw==',
-        TOKEN: process.env.API_TOKEN,
+        TOKEN: process.env.API_TOKEN ?? 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
     },
 
     // Endpoints

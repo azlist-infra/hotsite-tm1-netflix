@@ -20,7 +20,7 @@ export { LocationSection } from './inscricao/LocationSection'
 export { FAQAccordion } from './inscricao/FAQAccordion'
 export { PaxNotRegisteredForm } from './inscricao/PaxNotRegisteredForm'
 export { PaxAlreadyRegistered } from './inscricao/PaxAlreadyRegistered'
-export { faqData, type FAQItem } from './inscricao/faq.tsx'
+export { faqData, type FAQItem } from './inscricao/faq'
 
 // Hooks
 export { useHomeForm } from './home'
