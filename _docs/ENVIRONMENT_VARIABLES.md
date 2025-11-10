@@ -94,7 +94,7 @@ Crie um arquivo `.env.local` na raiz do projeto:
 
 ```env
 # API Token
-API_TOKEN=YmxzLmZlbGlwZWRhczpkaXdlZndoaXVkamlvYXNkam5lYm5lbw==
+API_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 # Upstash Redis KV
 STORAGE_KV_REST_API_URL=https://xxxxx.upstash.io
