@@ -71,7 +71,7 @@ export const QRCodeNetflix = ({
       const qrCodeString = `{"SearchKey": "${value}"}`
       return btoa(qrCodeString)
     }
-    
+
     // Retorna o valor puro
     return value
   }, [value, encrypt])
@@ -82,12 +82,18 @@ export const QRCodeNetflix = ({
   }
 
   return (
-    <QrCode.Root 
+    <QrCode.Root
       value={qrCodeValue}
       size="full"
       encoding={{
         ecc: hasLogo ? 'H' : 'M' // Maior correção de erro se tiver logo
       }}
+      //bg="yellow"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      p={{ base: 1, sm: 4, md: 8 }}
     >
       <QrCode.Frame>
         <QrCode.Pattern />
@@ -106,15 +112,21 @@ export const QRCodeNetflix = ({
           asChild
           fileName={fileName}
           mimeType={mimeType}
+
+
         >
           <Button
             variant="custom"
-            size="md"
-            mt={4}
-            w="100%"
-            gap={2}
+            //size="lg"
+            //w="100%"
+            //gap={2}
+            fontSize={{ base: "14px", sm: "18px", md: "18px", lg: "20px" }}
+            w={{ base: "80%", sm: "100%", md: "100%", lg: "100%" }}
+            mt={{ base: 2, sm: 4, md: 4, lg: 4 }}
+            //mx={{ base: 2, sm: 4, md: 4, lg: 4 }}
+            
           >
-            <Icon as={Icons.Download} boxSize={6} color="white" />
+            <Icon as={Icons.Download} boxSize={{ base: 4, sm: 6, md: 6, lg: 6 }} color="white" />
             {buttonText}
           </Button>
         </QrCode.DownloadTrigger>

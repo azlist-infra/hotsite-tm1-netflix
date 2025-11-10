@@ -54,7 +54,7 @@ export const textStyles = defineTextStyles({
                 value: {
                     fontFamily: fontFamily.primary,
                     fontWeight: '400',
-                    fontSize: { base: '18px', md: '26.67px' },
+                    fontSize: { base: '14px', sm: '18px', md: '22px', lg: '26.67px' },
                     lineHeight: '100%',
                     letterSpacing: '0%',
                 },
@@ -78,9 +78,9 @@ export const textStyles = defineTextStyles({
                 value: {
                     fontFamily: fontFamily.primary,
                     fontWeight: '400',
-                    fontSize: '16px',
+                    fontSize: { base: '14px', sm: '16px', md: '18px', lg: '20px' },
                     lineHeight: '16px',
-                    letterSpacing: '0px',
+                    letterSpacing: '10px',
                 },
             },
         },

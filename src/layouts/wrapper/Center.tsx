@@ -8,7 +8,7 @@ type CenterProps = FlexProps & {
 export function Center({ children, justify = "center", direction = "row", ...props }: CenterProps) {
 
     return (
-        <ChakraCenter>
+        <ChakraCenter minW="280px">
         <Flex
             align="center"
             justify={justify}
@@ -18,7 +18,7 @@ export function Center({ children, justify = "center", direction = "row", ...pro
 
             p={props.padding || 4}
             minH={props.minH || "200px"}
-            minW={props.minW || "breakpoint-base"}
+            minW={props.minW || "280px"}
             w={props.w || "100%"}
             maxW={props.maxW || "100%"}
             flex='1'

@@ -56,6 +56,7 @@ export default function InscricaoPage() {
             //bgColor="yellow"
             flexDirection="column"
             py={{ base: 8, md: 12 }}
+            mx={2}
             //w={{ base: "90%", sm: "90%", md: "1060px", lg: "1060px" }}
             maxW={'1060px'}
             w={{ base: '100%', xl: '1060px' }}
@@ -71,8 +72,8 @@ export default function InscricaoPage() {
               <CustomImage
                 src="/img/netflix/inscricao_imagem_01.png"
                 alt="Feito Aqui"
-                width={1056}
-                height={321}
+                width={523}
+                height={160}
                 mobileWidth="100%"
               />
             </Box>

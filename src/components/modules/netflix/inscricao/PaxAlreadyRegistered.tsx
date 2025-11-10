@@ -30,9 +30,9 @@ export const PaxAlreadyRegistered = ({
   const qrCodeValue = paxData.SearchKey || paxData.paxData?.SearchKey || paxEmail
 
   return (
-    <Flex 
-      direction="column" 
-      gap={{ base: 6, md: 8 }} 
+    <Flex
+      direction="column"
+      gap={{ base: 6, md: 8 }}
       align="center"
       w="100%"
       maxW={{ base: "100%", md: "90%" }}
@@ -47,7 +47,7 @@ export const PaxAlreadyRegistered = ({
         >
           Inscrição confirmada!
         </Text>
-        
+
         <Text
           textStyle="brand.text.default"
           color="white"
@@ -69,7 +69,7 @@ export const PaxAlreadyRegistered = ({
       {/* 2. QR CODE */}
       <Box
         bg="white"
-        p={{ base: 8, md: 14 }}
+        p={{ base: 4, sm: 8, md: 14 }}
         borderRadius="12px"
         w={{ base: "100%", sm: "100%", md: "100%", lg: "100%" }}
         maxW="500px"
@@ -99,9 +99,13 @@ export const PaxAlreadyRegistered = ({
           size="lg"
           w="100%"
           gap={2}
-          fontSize={{ base: "16px", md: "18px" }}
+          fontSize={{ base: "14px", sm: "18px", md: "18px", lg: "20px" }}
         >
-          <Icon as={Icons.Message} boxSize={6} color="white" />
+          <Icon
+            as={Icons.Message}
+            color="white"
+            boxSize={{ base: 4, sm: 6, md: 6, lg: 6 }}
+          />
           Receber QR Code pelo WhatsApp
         </Button>
       </Link>
