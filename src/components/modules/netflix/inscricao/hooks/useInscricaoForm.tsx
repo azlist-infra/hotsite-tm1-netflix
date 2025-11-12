@@ -112,7 +112,7 @@ export function useInscricaoForm() {
 
 
             if (result.success) {
-                setSuccessMessage('Inscrição realizada com sucesso! Você receberá um e-mail de confirmação.')
+                setSuccessMessage('Presença confirmada!')
 
                 // Atualiza os dados no sessionStorage com as novas informações
                 const updatedPaxData = {
@@ -142,8 +142,6 @@ export function useInscricaoForm() {
                                 color="white"
                                 whiteSpace="pre-line"
                             >
-                                Sua inscrição foi concluída com sucesso.
-                                <br /><br />
                                 Esperamos por você no <Text as="span" fontStyle="italic">Feito Aqui</Text>, nasce no Brasil, viaja pelo mundo.
                             </Text>
                         </>
@@ -155,11 +153,11 @@ export function useInscricaoForm() {
                 // Scroll para o topo
                 //window.scrollTo({ top: 0, behavior: 'smooth' })
             } else {
-                setError(result.error || 'Erro ao realizar inscrição')
+                setError(result.error || 'Erro!')
             }
         } catch (err) {
             console.error('Erro:', err)
-            setError('Erro ao processar inscrição. Tente novamente.')
+            setError('Erro ao processar. Tente novamente.')
         }
     }
 

@@ -22,6 +22,7 @@ export function Center({ children, justify = "center", direction = "row", ...pro
             w={props.w || "100%"}
             maxW={props.maxW || "100%"}
             flex='1'
+            //layerStyle={'fill.solid'}
             {...props}
         >
             {children}

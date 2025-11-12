@@ -95,7 +95,7 @@ export default function InscricaoPage() {
             {/* Seção de Inscrição */}
             <Box w="100%" maxW="100%" >
               <Flex direction="column" gap={{ base: 4, md: 6 }} mb={{ base: 6, md: 8 }} justify="center" align="stretch">
-                <TitleBase title={isAlreadyConfirmed ? "Inscrição Confirmada" : "Confirme sua presença"} />
+                <TitleBase title={isAlreadyConfirmed ? "Presença Confirmada" : "Confirme sua presença"} />
 
                 {/* Mensagens de Sucesso/Erro */}
                 {successMessage && (

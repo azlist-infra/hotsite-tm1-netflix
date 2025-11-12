@@ -47,7 +47,7 @@ export default function UnsubscribePage() {
                 fontSize={{ base: "24px", md: "32px" }}
                 mb={{ base: 4, md: 6 }}
               >
-                Cancelar Inscrição
+                Cancelar envios de e-mails
               </Text>
               
               <Text 
@@ -55,7 +55,7 @@ export default function UnsubscribePage() {
                 textAlign="center" 
                 color="white"
               >
-                Digite seu endereço de e-mail para cancelar sua inscrição em nossa lista.
+                Informe seu e-mail para deixar de receber nossas mensagens.
               </Text>
             </Box>
 
@@ -87,7 +87,7 @@ export default function UnsubscribePage() {
                     mt={{ base: 2, md: 4 }}
                     px={{ base: 8, md: 16 }}
                   >
-                    {isLoading ? 'Processando...' : 'Cancelar Inscrição'}
+                    {isLoading ? 'Processando...' : 'Cancelar'}
                   </Button>
                 </VStack>
               </form>

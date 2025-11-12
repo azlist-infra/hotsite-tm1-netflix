@@ -40,19 +40,13 @@ export const PaxAlreadyRegistered = ({
     >
       {/* 1. TEXTOS */}
       <Flex direction="column" gap={{ base: 2, md: 2 }} align="center" justifyContent="flex-start" textAlign="center">
-        <Text
-          textStyle="brand.text.xlbold"
-          color="primary"
-          fontSize={{ base: "24px", md: "32px" }}
-        >
-          Inscrição confirmada!
-        </Text>
+      
 
         <Text
           textStyle="brand.text.default"
           color="white"
           maxW={{ base: "100%", md: "100%" }}
-          mt={{ base: 4, md: 6 }}
+          //mt={{ base: 4, md: 6 }}
         >
           A Netflix espera por você no <Text as="span" fontStyle="italic">Feito Aqui</Text> - nasce no Brasil, viaja pelo mundo.
         </Text>
