@@ -53,7 +53,7 @@ export function FooterHotsite() {
 
           {/* Política de privacidade - alinhado à direita */}
           <Link
-            href="https://help.netflix.com/legal/privacy"
+            href="/politica-de-privacidade-feito-aqui.pdf"
             target="_blank"
             fontFamily="Roboto"
             fontWeight={400}
@@ -61,6 +61,9 @@ export function FooterHotsite() {
             lineHeight="100%"
             letterSpacing="0%"
             color="white"
+            //noreferrer
+            //noopener
+            rel="noopener noreferrer"
             _hover={{
               opacity: 0.8,
               textDecoration: 'underline'

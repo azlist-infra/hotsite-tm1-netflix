@@ -23,7 +23,7 @@ export const LocationSection = (): JSX.Element => {
             >
               R. Funchal, 500 - Vila Olímpia
               <br />
-              São Paulo (SP)
+              São Paulo, SP
             </Text>
           </Box>
 
