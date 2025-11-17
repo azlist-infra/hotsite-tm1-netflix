@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/toast";
 import { ModalProvider } from "@/contexts/ModalContext";
 import type { Metadata, Viewport } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 
 export const metadata: Metadata = {
@@ -40,7 +41,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  themeColor: "#ffffff",
+  themeColor: "#000000",
   colorScheme: "light",
 };
 
@@ -60,7 +61,9 @@ export default function RootLayout(props: { children: React.ReactNode }) {
           </ReactQueryProvider>
           <Toaster />
         </ChakraProviderApp>
+
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   )
