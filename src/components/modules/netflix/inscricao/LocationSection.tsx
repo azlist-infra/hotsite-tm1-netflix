@@ -21,9 +21,7 @@ export const LocationSection = (): JSX.Element => {
               color="gray.300"
               mt={3}
             >
-              R. Funchal, 500 - Vila Olímpia
-              <br />
-              São Paulo, SP
+              R. Funchal, 500 - Vila Olímpia - São Paulo, SP
             </Text>
           </Box>
 
@@ -40,13 +38,15 @@ export const LocationSection = (): JSX.Element => {
                 textStyle="brand.location.normal"
                 color="white"
               >
-                <Text as="span" textStyle="brand.location.bold">Carro de aplicativo:</Text> o desembarque pode ser feito em frente à entrada principal do Villaggio JK.
+                <Text as="span" textStyle="brand.location.bold">
+                  Carro de aplicativo:
+                  </Text> o desembarque pode ser feito em frente à entrada principal do Villaggio JK.
               </Text>
               <Text
                 textStyle="brand.location.normal"
                 color="white"
               >
-                <Text as="span" textStyle="brand.location.bold">Carro particular:</Text> há serviço de valet disponível no local.
+                <Text as="span" textStyle="brand.location.bold">Carro particular:</Text> haverá serviço de valet no local.
               </Text>
             </Flex>
           </Box>

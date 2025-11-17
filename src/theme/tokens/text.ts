@@ -59,6 +59,16 @@ export const textStyles = defineTextStyles({
                     letterSpacing: '0%',
                 },
             },
+            textBold: {
+                description: "Texto do modal bold",
+                value: {
+                    fontFamily: fontFamily.primary,
+                    fontWeight: '700',
+                    fontSize: { base: '14px', sm: '18px', md: '22px', lg: '26.67px' },
+                    lineHeight: '100%',
+                    letterSpacing: '0%',
+                },
+            },
         },
 
         button: {

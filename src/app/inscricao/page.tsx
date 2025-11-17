@@ -82,12 +82,12 @@ export default function InscricaoPage() {
             <Box w="100%" maxW="100%">
               <Flex direction="column" gap={{ base: 3, md: 4 }} mt={{ base: 6, md: 12 }}>
                 <Text textStyle="brand.text.xlbold" color="white" textAlign="left">
-                  O <Text as="span" fontStyle="italic">Feito Aqui</Text> é um encontro criado para celebrar o talento, a criatividade e o impacto do audiovisual brasileiro.
+                  O <Text as="span" fontStyle="italic">Feito Aqui</Text> é um encontro para celebrar a força, a criatividade e o impacto do audiovisual brasileiro.
                 </Text>
                 <Text textStyle="brand.text.xl" color="white" textAlign="left" mt={{ base: 2, md: 3 }}>
-                  Um momento para reunir parceiros, profissionais e criadores que fazem parte dessa trajetória, compartilhando conquistas, novas histórias e o que vem pela frente.
+                  Um momento para reunir parceiros e quem faz a magia acontecer para compartilharmos conquistas, novas histórias e o que vem pela frente.
                   <br />
-                  Mais do que um evento, é uma experiência que reconhece o poder das narrativas feitas no Brasil e seu alcance global.
+                  Mais do que um evento, o <Text as="span" fontStyle="italic">Feito Aqui</Text> é um reconhecimento do poder das produções brasileiras e seu alcance global.
                 </Text>
               </Flex>
             </Box>

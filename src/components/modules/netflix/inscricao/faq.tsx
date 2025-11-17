@@ -21,13 +21,21 @@ export const faqData: FAQItem[] = [
         ),
         answer: (
             <>
-                Não. O <Text as="span" fontStyle="italic">Feito Aqui</Text> é um evento exclusivo para convidados da Netflix.
+                Não. O <Text as="span" fontStyle="italic">Feito Aqui</Text> é um evento exclusivo para convidados da Netflix e parceiros do audiovisual brasileiro.
             </>
         )
     },
     {
-        question: 'O evento será presencial ou digital?',
-        answer: 'Este é um evento presencial.'
+        question: (
+            <>
+                O evento será presencial ou digital?
+            </>
+        ),
+        answer: (
+            <>
+                O <Text as="span" fontStyle="italic">Feito Aqui</Text> é um evento <Text as="span" fontWeight="bold">presencial</Text>.
+            </>
+        )
     },
     {
         question: 'O evento é acessível?',
@@ -35,11 +43,19 @@ export const faqData: FAQItem[] = [
     },
     {
         question: 'Posso indicar outra pessoa para participar do evento?',
-        answer: 'O evento é restrito aos convidados da Netflix.'
+        answer: 'Não. O evento é restrito a convidados da Netflix.'
     },
     {
-        question: 'Haverá estacionamento no local?',
-        answer: 'Sim. Haverá serviço de valet disponível no local.'
+        question: (
+            <>
+                Haverá estacionamento no local?
+            </>
+        ),
+        answer: (
+            <>
+                Sim. O Villaggio JK oferece serviço de <Text as="span" fontWeight="bold">valet</Text> no local.
+            </>
+        )
     },
     {
         question: 'Haverá chapelaria no local?',

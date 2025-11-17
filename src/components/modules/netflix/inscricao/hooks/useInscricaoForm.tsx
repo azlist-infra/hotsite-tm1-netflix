@@ -133,7 +133,7 @@ export function useInscricaoForm() {
 
                 // mostra modal de sucesso
                 showModal({
-                    title: 'Presença confirmada!',
+                    title: 'Tudo certo!',
                     message: (
                         <>
                             <Text
@@ -141,8 +141,10 @@ export function useInscricaoForm() {
                                 textAlign="center"
                                 color="white"
                                 whiteSpace="pre-line"
+                                lineHeight="130%"
                             >
-                                Esperamos por você no <Text as="span" fontStyle="italic">Feito Aqui</Text>, nasce no Brasil, viaja pelo mundo.
+                                <Text as="span" textStyle="brand.modal.textBold">Sua presença está confirmada. </Text>
+                                Esperamos por você no <Text as="span" textStyle="brand.modal.textBold"><Text as="span" fontStyle="italic">Feito Aqui - nasce no Brasil, viaja pelo mundo.</Text></Text>
                             </Text>
                         </>
                     ),
